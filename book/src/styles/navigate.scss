@@ -1,0 +1,37 @@
+.item-render{
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    .item-render-left{
+        align-items: center;
+        gap: 1rem;
+        display: flex;
+        .left-column{
+            a{
+                font-size: 1.2rem;
+                font-weight: bold;
+                -webkit-box-orient: vertical;
+                display: block;
+                display: -webkit-box;
+                overflow: hidden !important;
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 2;
+            }
+        }
+        img{
+                min-width: 100px;
+                height: 100px;
+                object-fit: cover;
+                border-radius: 999px;
+        }
+    }
+    .item-render-right{
+        font-weight: bold;
+    }
+}
+.data-search{
+    height: 350px;
+    overflow-y: scroll;
+}

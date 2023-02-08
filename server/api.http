@@ -1,0 +1,54 @@
+POST   http://localhost:8344/api/login/
+Content-Type : application/json
+
+{
+    "email": "tanJwtTest@gmail.com",
+    "password":"123456"
+}
+
+###
+POST   http://localhost:8344/api/register/
+Content-Type : application/json
+
+{
+    "email": "tanJwtTest@gmail.com",
+    "password":"123456",
+    "name":"tann"
+}
+
+###
+GET http://localhost:8344/api/user/
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ0YW5Kd3RUZXN0QGdtYWlsLmNvbSIsInJvbGVDb2RlIjoiUjIiLCJpYXQiOjE2NzU0MzgzOTEsImV4cCI6MTY3NTg3MDM5MX0.0jM7XaiYYiBOuH_u0aRVsWVRRLHdxf4Cm7zQtSJsqPQ
+
+
+
+###
+GET http://localhost:8344/api/insert/
+
+
+###
+GET http://localhost:8344/api/books/all
+
+
+###
+GET http://localhost:8344/api/books/?order=price&order=DESC&limit=2&page=5
+
+###
+GET http://localhost:8344/api/books/?price=40&price=50&limit=5
+
+###
+GET http://localhost:8344/api/books/?price=40&price=50
+
+###
+POST http://localhost:8344/api/book/create
+Content-Type : application/json
+
+{
+    "id":"123",
+    "title": "tan test",
+    "price":"123",
+    "available":"123",
+    "category_code":"IH17",
+    "image_sId":"123"
+
+}
