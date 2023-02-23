@@ -2,4 +2,27 @@
     background: url('https://dispatch.barnesandnoble.com/content/dam/ccr/global/global-nav-banner/background/bg_snowflakes.png');
     height: 80px;
     background-color: #e6cacf;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px;
+    p{
+        align-self: center;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+}
+.banner-ship{
+    height: 40px;
+    color: white;
+    background-color: #3D5962;
+    display: flex;
+    justify-content: center;
+    margin-top: 1px;
+    p{
+        align-self: center;
+        font-weight: bold;
+        font-size: 1em;
+    }
 }

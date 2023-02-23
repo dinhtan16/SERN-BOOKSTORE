@@ -7,6 +7,7 @@ import { Outlet } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import { fetchCurrentUser } from '../store/slices/userSlice'
+import Banner from './Home/Banner'
 const Layout = () => {
   const isLogged = useSelector(state => state.auth.isLoggedIn)
   
@@ -30,6 +31,7 @@ const Layout = () => {
   return (
    <>
         <Navigate/>
+        <Banner />
         {/* <RouterLayout /> */}
         {/* <AdminPage /> */}
         <Outlet />

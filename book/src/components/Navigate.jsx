@@ -41,7 +41,6 @@ import ListNavbar from "./Home/ListNavbar";
 export default function Navigate() {
   const currentUser = useSelector((state) => state.user.currentUser);
   // console.log(currentUser?.roleData.code)
-  const [showBasic, setShowBasic] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -52,6 +51,7 @@ export default function Navigate() {
 
   const isLogged = useSelector((state) => state.auth.isLoggedIn);
   const cartItems = useSelector(state => state.cart.cartItems)
+  const orderInfo  = useSelector(state => state.order?.userOrders)
 
   // const navigate = useNavigate();
   // const dispatch = useDispatch();
@@ -122,165 +122,9 @@ export default function Navigate() {
     }
   };
   return (
-    // <MDBNavbar
-    //   expand="lg"
-    //   light
-    //   bgColor="light"
-    //   style={{ zIndex: 1 }}
-    //   sticky="top"
 
-    // >
-    //   <MDBContainer fluid>
-    //     <MDBNavbarBrand href="/">
-    //       <img src={logo} alt="" />
-    //     </MDBNavbarBrand>
-
-    //     <MDBNavbarToggler
-    //       aria-controls="navbarSupportedContent"
-    //       aria-expanded="false"
-    //       aria-label="Toggle navigation"
-    //       onClick={() => setShowBasic(!showBasic)}
-    //     >
-    //       <MDBIcon icon="bars" fas />
-    //     </MDBNavbarToggler>
-
-    //     <MDBCollapse navbar show={showBasic}>
-    //       <MDBNavbarNav
-    //         className="mr-auto mb-2 mb-lg-0"
-    //         style={{ alignItems: "center", gap: "2rem" }}
-    //       >
-    //         <MDBNavbarItem>
-    //           <MDBNavbarLink active aria-current="page" href="/">
-    //             Home
-    //           </MDBNavbarLink>
-    //         </MDBNavbarItem>
-
-    //         <MDBNavbarItem>
-    //           <NavLink to={`api/books/all`}>Shop</NavLink>
-    //         </MDBNavbarItem>
-
-    //         <MDBNavbarItem>
-    //           <MDBDropdown>
-    //             <MDBDropdownToggle tag="a" className="nav-link" role="button">
-    //               Dropdown
-    //             </MDBDropdownToggle>
-    //             <MDBDropdownMenu>
-    //               <MDBDropdownItem link>Action</MDBDropdownItem>
-    //               <MDBDropdownItem link>Another action</MDBDropdownItem>
-    //               <MDBDropdownItem link>Something else here</MDBDropdownItem>
-    //             </MDBDropdownMenu>
-    //           </MDBDropdown>
-    //         </MDBNavbarItem>
-
-    //       </MDBNavbarNav>
-    //   {
-    //         <div className={`${isDropdown ? 'user-welcome active' : 'user-welcome'}`} onClick={() => setIsDropdown(prev => !prev) }>
-    //        <div className="user-welcome-right">
-    //             <img src={currentUser?.avatar} alt="Your account" />
-    //           <span>  {currentUser?.name}</span>
-    //        </div>
-    //         <div className="notify"></div>
-    //        <div className="user-welcome-left">
-    //       {!isDropdown ?   <RiArrowDropDownLine size={32}/> : <RiArrowDropUpLine size={32}/>}
-    //        </div>
-    //        <div className="content">
-    //        {
-    //         currentUser?.roleData?.code === 'R1' && <div className="content-item" id='order' onClick={handleAdmin}>
-    //         <MdAdminPanelSettings/>
-    //         Admin Panel
-    //         </div>}
-    //         <div className="content-item" id='order' onClick={() =>navigate('/order-info')}>
-    //         <VscPackage/>
-    //         Your Orders <span className="order-notify">1</span>
-    //         </div>
-    //         <div className="content-item" onClick={() => navigate('/user-info')}>
-    //           <BiUser />
-    //           <span>User Information</span>
-    //         </div>
-    //         <div className="content-auth">
-
-    //         <div className={isLogged ? 'auth logout' : 'auth'}>
-    //           <div onClick={() => handleLogout()}>{isLogged ? <div >Sign Out</div> : 'Sign in'}</div>
-    //         </div>
-    //         </div>
-    //        </div>
-    //         </div>
-    //   }
-    //       <form className="d-flex input-group w-auto">
-    //         <input
-    //           onClick={showModal}
-    //           type="text"
-    //           className="form-control"
-    //           placeholder="Search book"
-    //           aria-label="Search"
-    //         />
-    //         {/* <MDBBtn color='primary' type='submit'>Search</MDBBtn> */}
-    //       </form>
-    //     </MDBCollapse>
-    //     <>
-    //       <Modal
-    //         style={{ zIndex: 99999 }}
-    //         title="Search Book"
-    //         open={isModalOpen}
-    //         onOk={handleOk}
-    //         onCancel={handleCancel}
-    //       >
-    //         <form className="d-flex input-group w-auto" method="POST">
-    //           <input
-    //             type="text"
-    //             className="form-control"
-    //             autoComplete="off"
-    //             onChange={handleChange}
-    //             name="name"
-    //             placeholder="Type to search"
-    //             aria-label="Search"
-    //           />
-    //           {/* <MDBBtn color='primary' type='submit'>Search</MDBBtn> */}
-    //         </form>
-    //         <div className="data-search" >
-    //           {isLoading ?
-    //             <>
-    //               {
-    //                 [1,2,3].map(item => (
-    //                   <div  className="item-render-mt">
-    //                   <div className="item-render-left">
-    //                    <Skeleton circle width={80} height={80} count={1} />
-    //                     <div className="left-column">
-    //                       <Link to="#">  <Skeleton  width={150} count={1}/></Link>
-    //                       <div>  <Skeleton width={150} count={1}/></div>
-    //                     </div>
-    //                   </div>
-    //                   <div className="item-render-right">  <Skeleton count={1}  width={30} /></div>
-    //                 </div>
-    //                 ))
-    //               }
-
-    //             </>
-
-    //           : searchData?.length > 1 ? searchData?.map((item) => {
-    //             return (
-    //               <div key={item.id} className="item-render">
-    //                 <div className="item-render-left">
-    //                   <img
-    //                     src={item.imageUrl}
-    //                     alt="none"
-    //                   />
-    //                   <div className="left-column">
-    //                     <Link to="#">{item.title}</Link>
-    //                     <div>{item.cateCode.value}</div>
-    //                   </div>
-    //                 </div>
-    //                 <div className="item-render-right">{item.price}$</div>
-    //               </div>
-    //             );
-    //           } ) : <div> not found, please type again</div>}
-    //         </div>
-    //       </Modal>
-    //     </>
-    //   </MDBContainer>
-    // </MDBNavbar>
-    <div className="header">
-      <div className="navbar-header">
+    <div className="headers">
+      <div className="headers-navbar">
         <div className="navbar-brand">
           <span class='menu-mobile' onClick={() => setIsMobile(prev => !prev)}><AiOutlineMenu size={24} /></span>
           <span onClick={() => navigate('/')} style={{cursor:'pointer'}}><img src={logo} alt="" /></span>
@@ -314,10 +158,8 @@ export default function Navigate() {
                       <div className="item-render-left">
                         <Skeleton circle width={80} height={80} count={1} />
                         <div className="left-column">
-                          <Link to="#">
                             {" "}
                             <Skeleton width={150} count={1} />
-                          </Link>
                           <div>
                             {" "}
                             <Skeleton width={150} count={1} />
@@ -338,7 +180,7 @@ export default function Navigate() {
                       <div className="item-render-left">
                         <img src={item.imageUrl} alt="none" />
                         <div className="left-column">
-                          <Link to="#">{item.title}</Link>
+                          <Link to={`/detail/${item.id}`} onClick={() => setIsModalOpen(false)} title={item.title}>{item.title}</Link>
                           <div>{item.cateCode.value}</div>
                         </div>
                       </div>
@@ -386,10 +228,18 @@ export default function Navigate() {
                 <div
                   className="content-item"
                   id="order"
-                  onClick={() => navigate("/order-info")}
+                  onClick={() => navigate("/cart")}
                 >
                   <VscPackage />
-                  Your Orders <span className="order-notify">{cartItems.length || 0}</span>
+                  Carts <span className="order-notify">{cartItems.length || 0}</span>
+                </div>
+                <div
+                  className="content-item"
+                  id="order"
+                  onClick={() => navigate("/your-order")}
+                >
+                  <VscPackage />
+                  Your Orders <span className="order-notify">{orderInfo.length || 0}</span>
                 </div>
                 <div
                   className="content-item"
@@ -463,7 +313,7 @@ export default function Navigate() {
                       <div className="item-render-left">
                         <img src={item.imageUrl} alt="none" />
                         <div className="left-column">
-                          <Link to="#">{item.title}</Link>
+                          <Link to={`/detail/${item.id}`} onClick={() => setIsModalOpen(false)}>{item.title}</Link>
                           <div>{item.cateCode.value}</div>
                         </div>
                       </div>

@@ -1,4 +1,6 @@
+
 .order-info{
+    position: relative;
     display: grid;
     justify-content: center;
     margin-top: 2.2rem;
@@ -7,6 +9,8 @@
     gap: 2rem;
     padding: 20px;
     // margin: auto;
+
+    
     .title{
         margin-bottom: 20px;
     }

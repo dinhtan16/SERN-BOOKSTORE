@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllBooksLimit, getAllBooks } from "../../services/books";
+import { getAllBooksLimit, getAllBooks ,getOneBookService} from "../../services/books";
 export const getAllBooksDataLimit = createAsyncThunk(
   "books/fetch",
   async (query) => {
@@ -32,12 +32,29 @@ export const getAllBooksDefault = createAsyncThunk(
     }
   }
 );
+export const getOneBook = createAsyncThunk(
+  "bookOne/fetch",
+  async (id) => {
+    // const {page,limit} = data
+    try {
+      // console.log(id)
+      const res = await getOneBookService({id:id});
+
+      // console.log(res.data);
+     
+      return res?.data.bookData;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 const allBookSlice = createSlice({
   name: "books",
   initialState: {
     allBookLimit: [],
     currentPagesize:10,
-    allBook:[]
+    allBook:[],
+    bookDetail:null
   },
   reducers: {
     setCurrentPageSize:(state,action) => {
@@ -53,6 +70,9 @@ const allBookSlice = createSlice({
     });
     builder.addCase(getAllBooksDefault.fulfilled, (state, action) => {
       state.allBook = action.payload;
+    });
+    builder.addCase(getOneBook.fulfilled, (state, action) => {
+      state.bookDetail = action.payload;
     });
   },
 });

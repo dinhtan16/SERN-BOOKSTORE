@@ -47,10 +47,14 @@ const cartSlice = createSlice({
       localStorage.setItem("total", JSON.stringify(state.totals));
       localStorage.setItem("Cart", JSON.stringify(state.cartItems));
     },
+    setEmpty:(state,action) => {
+      state.cartItems = []
+      state.totals=0
+    }
   },
 });
 
-export const { addCart,deleteCart } = cartSlice.actions;
+export const { addCart,deleteCart,setEmpty } = cartSlice.actions;
 export default cartSlice.reducer;
 // extraReducers: {
 //   [getHomeData.pending]: (state, action) => {

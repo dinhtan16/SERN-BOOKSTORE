@@ -12,11 +12,31 @@
 .main-body{
     display: grid;
     grid-template-columns:minmax(160px,300px) 1fr;
-
+    font-family: 'Source Serif Pro', serif !important;
+    @media screen and (max-width:877px) {
+    display: flex;
+    flex-direction: column;        
+    }
     .filter-sidebar{
         margin-top: 2rem;
         padding: 0 20px;
-
+        .accordion-body{
+            padding: 0 !important;
+        }
+        .accordion{
+            min-width: 200px !important;
+        }
+        .accordion-header{
+            h6{
+                font-size: 1.2em !important;
+                color: #3d5962;
+            }
+        }
+        h4{
+            background-color: #3D5962;
+            padding: 10px;
+            color:white;
+        }
         h6{
             color:green;
             font-weight: bold;
@@ -29,9 +49,12 @@
                 color:blue;
                 text-decoration: underline;
             }
-            .filter-item:hover{
-                color:blue;
-                text-decoration: underline;
+            .filter-item{
+                padding: 10px;
+                &:hover{
+                    background-color: rgba($color: #3D5962, $alpha: 0.4);
+                    // color:white;
+                }
             }
         }
     }

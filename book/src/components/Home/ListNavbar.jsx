@@ -1,6 +1,6 @@
 import React from "react";
 import "../../styles/listNavbar.scss";
-import {IoMdClose} from 'react-icons/io'
+import { IoMdClose } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 const list = [
@@ -41,38 +41,48 @@ const list = [
     name: "Music and Movies",
   },
 ];
-const ListNavbar = ({setIsMobile,isMobile}) => {
-  const navigate = useNavigate()
+const ListNavbar = ({ setIsMobile, isMobile }) => {
+  const navigate = useNavigate();
   return (
     <>
-        <div className={`${isMobile && 'overlay'}`}></div>
-            <div className={`${isMobile ? "categories-list-header active" : "categories-list-header"}`}>
-              {list.map((item) => {
-                return (
-                 <>
-                      <span key={item.id} className="categories-list-item" onClick={() => navigate('/api/books/all')}>
-                        {item.name} 
-                        <section className="mega-menu">
-                            <h4>Lorems</h4>
-                            <ul>
-                                <li>Mauris</li>
-                                <li>Sed</li>
-                                <li>metus</li>
-                                <li>aliquam </li>
-                                <li>rutrum </li>
-                            </ul>
-        
-        
-                        </section>
-                      </span>
-                      
-                 </>
-                );
-              })}
-              <div className={`${isMobile ? "close active" : "close"}`} onClick={() => setIsMobile(!isMobile)}>
-                <IoMdClose size={24}/>
-              </div>
-            </div>
+      <div className={`${isMobile && "overlay"}`}></div>
+      <div
+        className={`${
+          isMobile ? "categories-list-header active" : "categories-list-header"
+        }`}
+      >
+        {list.map((item) => {
+          return (
+            <>
+              <span
+                key={item.id}
+                className="categories-list-item"
+                onClick={() => navigate("/api/books/all")}
+              >
+                {item.name}
+                <section className="mega-menu">
+                  <ul>
+                    {" "}
+                    <h4>Lorems</h4>
+                    <li>Mauris</li>
+                    <li>Sed</li>
+                    <li>metus</li>
+                    <li>aliquam </li>
+                    <li>rutrum </li>
+                  </ul>
+                
+                </section>
+              </span>
+            </>
+          );
+        })}
+        <div
+          className={`${isMobile ? "close active" : "close"}`}
+          onClick={() => setIsMobile(!isMobile)}
+        >
+          <IoMdClose size={24} />
+        </div>
+      </div>
     </>
   );
 };

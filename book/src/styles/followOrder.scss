@@ -1,0 +1,52 @@
+.order-follow{
+    // max-width: 1400px;
+    margin-top: 2rem !important;
+    margin: auto;
+    background-color: #FAFAFA;
+
+    padding: 20px;
+    .cost-estimate{
+        background-color: #fff;
+        flex-wrap: wrap;
+        width: fit-content;
+        width: -moz-fit-content;
+        padding: 20px;
+        display: flex;
+        border-radius: 3px;
+        border:2px solid #e1e2e6;
+        gap: 2rem;
+
+        .cost-estimate-item{
+            p:nth-child(1){
+                // color:red;
+                font-weight: bold;
+            }
+        }
+    }
+    .my-order{
+            background-color: #fff;
+            padding: 20px;
+        border:2px solid #e1e2e6;
+
+            margin-top: 1rem;
+            p{
+                font-weight: bold;
+                margin-bottom: 1rem !important;
+            }
+        .order-table{
+            
+            .order-search{
+                display: none;
+            padding:0 20px;
+
+                    input{
+                        width: 250px;
+                        border-radius: 0;
+                    }
+            }
+            .table{
+                
+            }
+        }
+    }
+}

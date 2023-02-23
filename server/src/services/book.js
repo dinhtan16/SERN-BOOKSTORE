@@ -49,6 +49,39 @@ new Promise(async (resolve, reject) => {
   });
 
   
+export const getOneBook = (body) =>
+new Promise(async (resolve, reject) => {
+    try {
+        
+      const response = await db.Book.findOne({
+        where:{id:body.id},
+        attributes:["id","title","price","available","imageUrl","priceCode",'description'],
+        include:[
+            {model:db.Category,as:"cateCode",attributes:["value"]}
+          ],
+
+
+      });
+      resolve({
+        err: response ? 0 : 1,
+        msg: response ? "Thanh cong" : "that bai",
+        bookData: response,
+      });
+    } catch (error) {
+      reject(error);
+    }
+    
+  });
+
+  
+
+
+
+
+
+
+
+
   export const createBook = (body,fileData) =>
   new Promise(async (resolve, reject) => {
       try {

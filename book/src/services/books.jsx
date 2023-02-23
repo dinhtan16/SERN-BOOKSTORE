@@ -43,3 +43,18 @@ export const searchBooks = (name) => new Promise(async (resolve,reject) => {
         reject(error)
     }
 })
+
+export const getOneBookService = (id) => new Promise(async (resolve,reject) => {
+    
+    try{
+        const response = await axiosConfig({
+            method:"post",
+            url:`/one-book`,
+            data:id
+        })
+        // console.log(response)
+        resolve(response)
+    }catch(error){
+        reject(error)
+    }
+})

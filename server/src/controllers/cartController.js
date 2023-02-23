@@ -19,11 +19,8 @@ export const createCartController = async (req, res) => {
  
 export const getCartUserController = async (req, res) => {
     try {
-      // const {page} =req.query
-      // console.log(req.query.page)
-    //   console.log(req.body)
-     const response = await getCartUser(req.body);
-    //  console.log(req.query.cateCode)
+      // console.log(req.user.id)
+     const response = await getCartUser(req.user.id);
      return res.status(200).json(response);
     
    } catch (error) {

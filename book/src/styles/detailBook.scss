@@ -1,0 +1,91 @@
+.book-detail {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 3rem !important;
+  display: flex;
+  justify-content: center;
+  gap:1rem;
+  flex-wrap: wrap;
+  font-family: "Source Serif Pro", serif !important;
+  &-img {
+    // width: 100%;
+    img {
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+  &-info {
+    padding: 15px;
+    // justify-self: flex-end !important;
+    &-name {
+      font-size: 2.2em;
+      font-weight: 500;
+    }
+
+    &-border {
+      border-top: 1px solid #e3e3e3;
+      padding-bottom: 10px !important;
+    }
+    &-price {
+      font-size: 1.9em;
+      font-weight: bold;
+    }
+    &-premium {
+      display: flex !important;
+        margin-bottom: 1rem;
+        gap: 0.6em;
+    }
+    &-add{
+        width: 300px;
+
+        outline: none;
+        border: 1px solid #2E0A05;
+        background: transparent;
+        padding: 8px;
+        &:hoveR{
+            background: #2E0A05;
+            color:white;
+        }
+    }
+    &-more{
+        margin-top: 20px;
+        display: flex;
+        gap:0.4rem;
+    }
+  }
+  &-description{
+    margin-top: 2rem;
+    padding: 1em;
+    .overview{
+        font-size: 1.5em;
+        font-style: italic;
+    }
+    .content{
+        border:1px solid black;
+        padding: 10px;
+        p{
+            line-height: 30px;
+        }
+        &-seller-note{
+            border:1px solid black;
+            padding: 10px !important;
+            display: inline-block;
+            font-weight: bold;
+            font-style: italic;
+
+            &-content{
+                margin-bottom: 1em !important;
+                font-weight: 200;
+            }
+
+        }
+    }
+  }
+  .more-like{
+    padding: 0 20px !important;
+    .list-like{
+      display: flex;
+      gap: 10px;
+    }
+  }
+}

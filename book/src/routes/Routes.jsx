@@ -6,7 +6,9 @@ import AdminPage from '../pages/Admin'
 import Shop from '../pages/Shop'
 import NoHeader from '../components/noHeader/NoHeader'
 import UserInfo from '../pages/UserInfo'
-import OrderInfo from '../pages/OrderInfo'
+import Cart from '../pages/Cart'
+import YourOrder from '../pages/YourOrder'
+import DetailBook from '../pages/DetailBook'
 
 //ko dang nhap van xem dc
 const publicRoutes = [
@@ -38,9 +40,17 @@ const publicRoutes = [
     // layout: HeaderOnly,
   },
   {
-    path: '/order-info',
-    component: OrderInfo,
+    path: '/cart',
+    component: Cart,
     // layout: HeaderOnly,
+  },
+  {
+    path: '/your-order',
+    component: YourOrder  ,
+  },
+  {
+    path: '/detail/:id',
+    component: DetailBook,
   },
   {
     path: '/admin',

@@ -4,9 +4,8 @@ const { Op } = require("sequelize");
 export const createCart = (body) =>
   new Promise(async (resolve, reject) => {
       try {
-        console.log(body)
         const response = await db.Cart.create({
-            id:v4(),
+            id:v4().slice(0,2),
             totalPrice:body.totalPrice,
             userId:body.userId,
             bookId:body.bookId,
@@ -15,7 +14,6 @@ export const createCart = (body) =>
         });
         // console.log(response[0])
         resolve(response)
-        console.log(response[0])
         // resolve({
         //   err: response[0] ? 0 : 1,
         //   msg: response[0] ? "tao cart Thanh cong" : " tao cart that bai",
@@ -27,30 +25,30 @@ export const createCart = (body) =>
       
     });
 
-    export const getCartUser = (body) =>
+    export const getCartUser = (id) =>
   new Promise(async (resolve, reject) => {
       try {
-        const response1 = await db.Cart.findAll({
-          where:{
-            userId:body.userId,
-          },
-          attributes:['bookId'],
+      //   const response1 = await db.Cart.findAll({
+      //     where:{
+      //       userId:id,
+      //     },
+      //     attributes:['bookId'],
           
   
-          });
-      const idList =await response1[0].dataValues.bookId.split(',')
-      const response2 = await db.Book.findAll({
-        where:{
-          id:idList,
-        },
-        attributes:['title','price','imageUrl','id'],
-      });
-      const  bookOrder =await response2
-      const bookData = bookOrder?.map(item => item.dataValues)
-      let lastResponse = []
-        const response3 = await db.Cart.findAll({
+      //     });
+      // const idList =await response1[0]?.dataValues.bookId.split(',')
+      // const response2 = await db.Book.findAll({
+      //   where:{
+      //     id:{[Op.in]:idList},
+      //   },
+      //   attributes:['title','price','imageUrl','id'],
+      // });
+      // const  bookOrder =await response2
+      // const bookData = bookOrder?.map(item => item.dataValues)
+      // let lastResponse = []
+        const response = await db.Cart.findAll({
             where:{
-              userId:body.userId,
+              userId:id,
             },
             attributes:['id','totalPrice','bookId','createdAt','totalQuantity'],
             include:[
@@ -60,12 +58,11 @@ export const createCart = (body) =>
               ],
     
         });
-        const last = await response3
-        lastResponse.push(last,bookData)
-        resolve(lastResponse)
+
+        resolve(response)
         
       } catch (error) {
-        console.log(error)
+        // console.log(error)
         reject(error);
 
       }

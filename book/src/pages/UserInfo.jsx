@@ -79,6 +79,7 @@ const UserInfo = () => {
     <div>
       <div className="user-info">
         <h3>User Information</h3>
+        <div style={{fontWeight:'300',marginBottom:10}}>It will be your shipping information</div>
         <div className="user-info-img personal-image">
             <label class="label" htmlFor="avatar">
             <input type="file" onChange={handleUploadFile}   id='avatar' />

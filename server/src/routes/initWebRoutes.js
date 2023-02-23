@@ -6,7 +6,7 @@ import { notFound } from '../../middlewares/handleErrors.js'
 import verifyToken from '../../middlewares/verify_token.js'
 import { verifyAdmin, verifyModeratorAdmin } from '../../middlewares/verify_role.js'
 import { insertController, insertPriceController } from '../controllers/insertController.js'
-import { deleteBookController, getBookController, insertBookController, updateBookController } from '../controllers/bookController.js'
+import { deleteBookController, getBookController, getOneBookController, insertBookController, updateBookController } from '../controllers/bookController.js'
 import { getCategoryController } from '../controllers/getCategory.js'
 import { getPriceFilterController } from '../controllers/getPriceFilter.js'
 
@@ -25,6 +25,12 @@ const router = express.Router()
 
     router.get('/api/books',getBookController)
     router.get('/api/books/all',getBookController)
+
+    //get one book
+    router.post('/one-book',getOneBookController)
+
+
+
     
     router.get('/api/category',getCategoryController)
     router.get('/api/price-filter',getPriceFilterController)

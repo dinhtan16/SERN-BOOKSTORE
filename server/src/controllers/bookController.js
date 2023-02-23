@@ -2,7 +2,7 @@ import {
   BadRequest,
   internalServerError,
 } from "../../middlewares/handleErrors";
-import { createBook, deleteBook, getBook, updateBook } from "../services/book";
+import { createBook, deleteBook, getBook, getOneBook, updateBook } from "../services/book";
 const cloudinary = require("cloudinary").v2;
 
 import {
@@ -31,6 +31,18 @@ export const getBookController = async (req, res) => {
     return res.status(200).json(response);
   } catch (error) {
     console.log(error);
+    return internalServerError(res);
+  }
+};
+export const getOneBookController = async (req, res) => {
+  try {
+    // const {page} =req.query
+    // console.log(req.query)
+    const response = await getOneBook(req.body);
+    //  console.log(req.query.cateCode)
+    return res.status(200).json(response);
+  } catch (error) {
+    // console.log(error);
     return internalServerError(res);
   }
 };

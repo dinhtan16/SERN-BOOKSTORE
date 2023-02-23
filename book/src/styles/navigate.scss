@@ -1,9 +1,9 @@
-.header{
+.headers{
     padding: 0 10px;
-
-    .navbar-header{
-        display: flex;
-        justify-content: space-between;
+    
+    &-navbar{
+        display: flex ;
+        justify-content: space-between !important;
         height: 60px;
         align-items: center;
         // flex:1 1 300px;
@@ -45,11 +45,12 @@
                 overflow: hidden !important;
                 text-overflow: ellipsis;
                 -webkit-line-clamp: 2;
+                width: 70%;
             }
         }
         img{
-                min-width: 100px;
-                height: 100px;
+                min-width: 70px;
+                height: 70px;
                 object-fit: cover;
                 border-radius: 999px;
         }
@@ -98,6 +99,11 @@
 .user-welcome{
     min-width: 170px;
    max-width: 500px;
+   @media screen and (max-width:490px) {
+       min-width: 0 !important;
+    span{
+    }
+}
     padding: 5px;
     position: relative;
     border-radius: 5px;
@@ -107,6 +113,14 @@
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+    &-right{
+        // display: none;
+        @media screen and (max-width:490px) {
+            span{
+                display: none;
+            }
+        }
+    }
     img{
         width: 35px;
         height: 35px;
