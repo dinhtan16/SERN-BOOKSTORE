@@ -1,6 +1,7 @@
+import Joi from "joi";
 import { BadRequest, internalServerError } from "../../middlewares/handleErrors.js";
-import { getOneUser } from "../services/user.js";
-
+import { getOneUser, updateUser } from "../services/user.js";
+import { idUser } from "../../helpers/joi_shcema.js";
 export const getCurrentUser = async (req, res) => {
     try {
      //  console.log(req.email)
@@ -12,23 +13,26 @@ export const getCurrentUser = async (req, res) => {
   
     
    } catch (error) {
-    console.log(error)
      return internalServerError(res)
    }
   };
 
   
-// export const getCurrentUser = async (req, res) => {
-//     try {
-//      //  console.log(req.email)
-//      const {error} = Joi.object({email,password}).validate(req.body)
-//       if(error) return BadRequest(error.details[0].message,res)
-//        const response = await loginUser(req.body);
-//        return res.status(200).json(response);
-     
+  export const updateUserController = async (req, res) => {
+    try {
+      const fileData = req.file; //single file
+      // console.log(fileData)
+      const { error } = Joi.object({ idUser }).validate({ idUser: req.body.id });
   
-    
-//    } catch (error) {
-//      return internalServerError(res)
-//    }
-//   };
+      if (error) {
+        //nếu data lỗi thì ảnh vẫn dc upload nên handle nếu data lỗi thì xóa ảnh đã upload
+        if (fileData) cloudinary.uploader.destroy(fileData.filename);
+        return BadRequest(error.details[0].message, res);
+      }
+  
+      const response = await updateUser(req.body, fileData);
+      return res.status(200).json(response);
+    } catch (error) {
+      return internalServerError(res);
+    }
+  };

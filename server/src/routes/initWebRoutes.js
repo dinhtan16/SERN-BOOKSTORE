@@ -1,14 +1,20 @@
 // import user from './user'
-import {getCurrentUser} from '../controllers/userController.js'
+import {getCurrentUser, updateUserController} from '../controllers/userController.js'
 import express from 'express'
-import  {authControllerLogin,authControllerRegister}  from '../controllers/authController.js'
+import  {authControllerLogin,authControllerRegister, refreshTokenController}  from '../controllers/authController.js'
 import { notFound } from '../../middlewares/handleErrors.js'
 import verifyToken from '../../middlewares/verify_token.js'
 import { verifyAdmin, verifyModeratorAdmin } from '../../middlewares/verify_role.js'
 import { insertController, insertPriceController } from '../controllers/insertController.js'
-import { getBookController, insertBookController } from '../controllers/bookController.js'
+import { deleteBookController, getBookController, insertBookController, updateBookController } from '../controllers/bookController.js'
 import { getCategoryController } from '../controllers/getCategory.js'
 import { getPriceFilterController } from '../controllers/getPriceFilter.js'
+
+
+import uploadCloud from '../../middlewares/uploadCloud.js'
+import { adminCheckController } from '../controllers/adminCheckController.js'
+import { createCartController, getCartUserController } from '../controllers/cartController.js'
+
 const router = express.Router()
  const initWebRoutes = (app) => {
 
@@ -17,28 +23,38 @@ const router = express.Router()
     router.post('/api/login',authControllerLogin)
 
 
-
-
-
     router.get('/api/books',getBookController)
     router.get('/api/books/all',getBookController)
-
+    
     router.get('/api/category',getCategoryController)
     router.get('/api/price-filter',getPriceFilterController)
 
     // router.get('/create-price',insertPriceController)
+    router.post('/api/refresh',refreshTokenController)
     
+    //CART
+    router.post('/cart-create',[verifyToken],createCartController)
+    router.get('/my-cart',[verifyToken],getCartUserController)
+
+
+
     //PRIVATE ROUTES // những route nằm dưới verify đều private
     // router.use(verifyToken)
     // router.use(verifyAdmin)
-
+    router.get('/api/user',[verifyToken],getCurrentUser)
+    
     router.get('/api/insert',insertController)
     router.get('/api/price',insertPriceController)
+    router.put('/api/update-user',[verifyToken],uploadCloud.single('avatar'),updateUserController)
 
-    router.post('/api/book/create',insertBookController)
+    router.post('/api/book/create',[verifyToken,verifyAdmin],uploadCloud.single('imageUrl'),insertBookController)
+    router.put('/api/book/update',[verifyToken,verifyAdmin],uploadCloud.single('imageUrl'),updateBookController)
+    router.delete('/api/book/delete',[verifyToken,verifyAdmin],deleteBookController)
+
+
     // router.use(verifyToken)
     // router.use(verifyModeratorAdmin) //verify role sau token
-    router.get('/admin',[verifyToken,verifyModeratorAdmin],getCurrentUser) //cách viết middleware thứ 2
+    router.get('/admin',[verifyToken,verifyAdmin],adminCheckController) //cách viết middleware thứ 2
 
 
     // app.use(notFound)

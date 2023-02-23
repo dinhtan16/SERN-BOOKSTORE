@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       });
   
       Book.belongsTo(models.Image,{foreignKey:'image_sId',targetKey:'id',as:'imgDataUrl'})
-      Book.hasOne(models.Cart,{foreignKey:"bookId",as:"bookIdData"})
+      Book.hasMany(models.Cart,{foreignKey:"bookId",as:"bookIdData"})
 
     }
   }
@@ -32,7 +32,8 @@ module.exports = (sequelize, DataTypes) => {
     description:DataTypes.TEXT,
     category_code:DataTypes.STRING,
     image_sId:DataTypes.INTEGER,
-    priceCode:DataTypes.STRING
+    priceCode:DataTypes.STRING,
+    fileName:DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Book',

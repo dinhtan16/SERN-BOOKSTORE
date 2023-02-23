@@ -11,8 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 } */
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@300;400;600&display=swap');
 *{
   margin: 0;
   padding: 0;
@@ -22,5 +22,9 @@ html{
   font-size: 100%;
 }
 body {
-  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Lato', sans-serif !important;
+}
+p{
+  margin: 0 !important;
+  padding: 0 !important;
 }

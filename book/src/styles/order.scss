@@ -1,0 +1,71 @@
+.order-info{
+    display: grid;
+    justify-content: center;
+    margin-top: 2.2rem;
+    background: #f8f6f5;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 2rem;
+    padding: 20px;
+    // margin: auto;
+    .title{
+        margin-bottom: 20px;
+    }
+    .delivery{
+        
+      .delivery-info{
+        background-color: #fff;
+        display: grid;
+        padding: 20px;
+        grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+        gap: 1rem;
+        .input{
+            // z-index: 1;
+            border-radius: 0px;
+        }
+      }
+      
+    .payment{
+        margin-top: 1rem;
+        .payment-info{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            input{
+                display: inline-block;
+                width: 20px;
+                border-radius: 50%;
+            }
+            
+        }
+    }
+    }
+    .order{
+        .order-detail{
+            background-color: #fff;
+            .order-btn{
+                padding: 20px;
+                button{
+                    width: 100%;
+                    outline: none;
+                    border:none;
+                    padding: 8px;
+                    background-color: #22331D;
+                    color:#fff;
+                }
+            }
+        }
+        .total{
+            .total-detail{
+                display: flex;
+                justify-content: space-between;
+                font-weight: bold;
+                margin-top: 1rem;
+            }
+            #border{
+                border-top:2px solid  #e9e7e7;
+                padding: 10px;
+            }
+        }
+    }
+    
+}

@@ -5,11 +5,12 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import AdminPage from "./pages/Admin";
 import { Route, Routes } from "react-router-dom";
 import publicRoutes from "./routes/Routes";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import DefaultLayout from "./components/Layout";
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
+
   return (
     <div>
       <Routes>
@@ -30,7 +31,7 @@ function App() {
           );
         })}
       </Routes>
-      {/* <ToastContainer /> */}
+      <ToastContainer />
     </div>
   );
 }

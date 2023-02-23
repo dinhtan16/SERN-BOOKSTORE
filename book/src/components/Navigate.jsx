@@ -1,36 +1,57 @@
 import React, { useState } from "react";
-import {
-  MDBContainer,
-  MDBNavbar,
-  MDBNavbarBrand,
-  MDBNavbarToggler,
-  MDBIcon,
-  MDBNavbarNav,
-  MDBNavbarItem,
-  MDBNavbarLink,
-
-  MDBDropdown,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-  MDBDropdownItem,
-  MDBCollapse,
-} from "mdb-react-ui-kit";
+// import {
+//   MDBContainer,
+//   MDBNavbar,
+//   MDBNavbarBrand,
+//   MDBNavbarToggler,
+//   MDBIcon,
+//   MDBNavbarNav,
+//   MDBNavbarItem,
+//   MDBNavbarLink,
+//   MDBDropdown,
+//   MDBDropdownToggle,
+//   MDBDropdownMenu,
+//   MDBDropdownItem,
+//   MDBCollapse,
+// } from "mdb-react-ui-kit";
 import "../styles/navigate.scss";
-import {  Modal } from "antd";
-import { Link, NavLink } from "react-router-dom";
+import logo from "../assets/imgs/logo.svg";
+import { toast } from "react-toastify";
+
+import {AiOutlineMenu} from 'react-icons/ai'
+import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
+import { VscPackage } from "react-icons/vsc";
+import { BiUser } from "react-icons/bi";
+import { MdAdminPanelSettings } from "react-icons/md";
+
+import { Modal } from "antd";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 // import { useDispatch } from "react-redux";
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { useEffect } from "react";
 import { searchBooks } from "../services/books";
 import useDebounce from "./hooks/useDebounce";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setLogOut } from "../store/slices/authSlice";
+import { setLogOutCurrentUser } from "../store/slices/userSlice";
+import { adminCheck } from "../services/AdminCheck";
+import { Input } from "antd";
+import ListNavbar from "./Home/ListNavbar";
 export default function Navigate() {
+  const currentUser = useSelector((state) => state.user.currentUser);
+  // console.log(currentUser?.roleData.code)
   const [showBasic, setShowBasic] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const [searchData, setSearchData] = useState([]);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const isLogged = useSelector((state) => state.auth.isLoggedIn);
+  const cartItems = useSelector(state => state.cart.cartItems)
 
   // const navigate = useNavigate();
   // const dispatch = useDispatch();
@@ -39,6 +60,9 @@ export default function Navigate() {
   const debounce = useDebounce(searchInput, 300);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDropdown, setIsDropdown] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -48,93 +72,221 @@ export default function Navigate() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
   useEffect(() => {
-    setIsLoading(true)
-    let delay
+    setIsLoading(true);
+    let delay;
     const fetch = async () => {
       const res = await searchBooks({ name: debounce });
-      setSearchData(res.data.bookData.rows);
+      setSearchData(res?.data?.bookData.rows);
 
-       delay = setTimeout(() => {
-        setIsLoading(false)
+      delay = setTimeout(() => {
+        setIsLoading(false);
         // console.log(123)
-      },1000)
-    
+      }, 1000);
     };
     fetch();
 
     return () => {
-      delay &&  clearTimeout(delay)
-    }
+      delay && clearTimeout(delay);
+    };
   }, [debounce]);
   const handleChange = (e) => {
     // console.log(e.target.value)
     setSearchInput(e.target.value);
   };
- 
+
+  const handleLogout = () => {
+    dispatch(setLogOut());
+    dispatch(setLogOutCurrentUser());
+    navigate("/login");
+  };
+  const handleAdmin = async () => {
+    try {
+      const res = await adminCheck();
+      if (res.status === 200) {
+        navigate("/admin");
+      }
+    } catch (err) {
+      toast.error("Required Admin!", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      console.log(err);
+    }
+  };
   return (
-    <MDBNavbar
-      expand="lg"
-      light
-      bgColor="light"
-      style={{ zIndex: 1 }}
-      sticky="top"
-    >
-      <MDBContainer fluid>
-        <MDBNavbarBrand href="#">Brand</MDBNavbarBrand>
+    // <MDBNavbar
+    //   expand="lg"
+    //   light
+    //   bgColor="light"
+    //   style={{ zIndex: 1 }}
+    //   sticky="top"
 
-        <MDBNavbarToggler
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-          onClick={() => setShowBasic(!showBasic)}
-        >
-          <MDBIcon icon="bars" fas />
-        </MDBNavbarToggler>
+    // >
+    //   <MDBContainer fluid>
+    //     <MDBNavbarBrand href="/">
+    //       <img src={logo} alt="" />
+    //     </MDBNavbarBrand>
 
-        <MDBCollapse navbar show={showBasic}>
-          <MDBNavbarNav
-            className="mr-auto mb-2 mb-lg-0"
-            style={{ alignItems: "center", gap: "2rem" }}
-          >
-            <MDBNavbarItem>
-              <MDBNavbarLink active aria-current="page" href="/">
-                Home
-              </MDBNavbarLink>
-            </MDBNavbarItem>
-            <MDBNavbarItem>
-              <NavLink to="login">Login</NavLink>
-            </MDBNavbarItem>
-            <MDBNavbarItem>
-              <NavLink to={`api/books/all`}>Shop</NavLink>
-            </MDBNavbarItem>
+    //     <MDBNavbarToggler
+    //       aria-controls="navbarSupportedContent"
+    //       aria-expanded="false"
+    //       aria-label="Toggle navigation"
+    //       onClick={() => setShowBasic(!showBasic)}
+    //     >
+    //       <MDBIcon icon="bars" fas />
+    //     </MDBNavbarToggler>
 
-            <MDBNavbarItem>
-              <MDBDropdown>
-                <MDBDropdownToggle tag="a" className="nav-link" role="button">
-                  Dropdown
-                </MDBDropdownToggle>
-                <MDBDropdownMenu>
-                  <MDBDropdownItem link>Action</MDBDropdownItem>
-                  <MDBDropdownItem link>Another action</MDBDropdownItem>
-                  <MDBDropdownItem link>Something else here</MDBDropdownItem>
-                </MDBDropdownMenu>
-              </MDBDropdown>
-            </MDBNavbarItem>
-          </MDBNavbarNav>
+    //     <MDBCollapse navbar show={showBasic}>
+    //       <MDBNavbarNav
+    //         className="mr-auto mb-2 mb-lg-0"
+    //         style={{ alignItems: "center", gap: "2rem" }}
+    //       >
+    //         <MDBNavbarItem>
+    //           <MDBNavbarLink active aria-current="page" href="/">
+    //             Home
+    //           </MDBNavbarLink>
+    //         </MDBNavbarItem>
 
-          <form className="d-flex input-group w-auto" method="POST">
-            <input
-              onClick={showModal}
-              type="text"
-              className="form-control"
-              placeholder="Search book"
-              aria-label="Search"
-            />
-            {/* <MDBBtn color='primary' type='submit'>Search</MDBBtn> */}
-          </form>
-        </MDBCollapse>
-        <>
+    //         <MDBNavbarItem>
+    //           <NavLink to={`api/books/all`}>Shop</NavLink>
+    //         </MDBNavbarItem>
+
+    //         <MDBNavbarItem>
+    //           <MDBDropdown>
+    //             <MDBDropdownToggle tag="a" className="nav-link" role="button">
+    //               Dropdown
+    //             </MDBDropdownToggle>
+    //             <MDBDropdownMenu>
+    //               <MDBDropdownItem link>Action</MDBDropdownItem>
+    //               <MDBDropdownItem link>Another action</MDBDropdownItem>
+    //               <MDBDropdownItem link>Something else here</MDBDropdownItem>
+    //             </MDBDropdownMenu>
+    //           </MDBDropdown>
+    //         </MDBNavbarItem>
+
+    //       </MDBNavbarNav>
+    //   {
+    //         <div className={`${isDropdown ? 'user-welcome active' : 'user-welcome'}`} onClick={() => setIsDropdown(prev => !prev) }>
+    //        <div className="user-welcome-right">
+    //             <img src={currentUser?.avatar} alt="Your account" />
+    //           <span>  {currentUser?.name}</span>
+    //        </div>
+    //         <div className="notify"></div>
+    //        <div className="user-welcome-left">
+    //       {!isDropdown ?   <RiArrowDropDownLine size={32}/> : <RiArrowDropUpLine size={32}/>}
+    //        </div>
+    //        <div className="content">
+    //        {
+    //         currentUser?.roleData?.code === 'R1' && <div className="content-item" id='order' onClick={handleAdmin}>
+    //         <MdAdminPanelSettings/>
+    //         Admin Panel
+    //         </div>}
+    //         <div className="content-item" id='order' onClick={() =>navigate('/order-info')}>
+    //         <VscPackage/>
+    //         Your Orders <span className="order-notify">1</span>
+    //         </div>
+    //         <div className="content-item" onClick={() => navigate('/user-info')}>
+    //           <BiUser />
+    //           <span>User Information</span>
+    //         </div>
+    //         <div className="content-auth">
+
+    //         <div className={isLogged ? 'auth logout' : 'auth'}>
+    //           <div onClick={() => handleLogout()}>{isLogged ? <div >Sign Out</div> : 'Sign in'}</div>
+    //         </div>
+    //         </div>
+    //        </div>
+    //         </div>
+    //   }
+    //       <form className="d-flex input-group w-auto">
+    //         <input
+    //           onClick={showModal}
+    //           type="text"
+    //           className="form-control"
+    //           placeholder="Search book"
+    //           aria-label="Search"
+    //         />
+    //         {/* <MDBBtn color='primary' type='submit'>Search</MDBBtn> */}
+    //       </form>
+    //     </MDBCollapse>
+    //     <>
+    //       <Modal
+    //         style={{ zIndex: 99999 }}
+    //         title="Search Book"
+    //         open={isModalOpen}
+    //         onOk={handleOk}
+    //         onCancel={handleCancel}
+    //       >
+    //         <form className="d-flex input-group w-auto" method="POST">
+    //           <input
+    //             type="text"
+    //             className="form-control"
+    //             autoComplete="off"
+    //             onChange={handleChange}
+    //             name="name"
+    //             placeholder="Type to search"
+    //             aria-label="Search"
+    //           />
+    //           {/* <MDBBtn color='primary' type='submit'>Search</MDBBtn> */}
+    //         </form>
+    //         <div className="data-search" >
+    //           {isLoading ?
+    //             <>
+    //               {
+    //                 [1,2,3].map(item => (
+    //                   <div  className="item-render-mt">
+    //                   <div className="item-render-left">
+    //                    <Skeleton circle width={80} height={80} count={1} />
+    //                     <div className="left-column">
+    //                       <Link to="#">  <Skeleton  width={150} count={1}/></Link>
+    //                       <div>  <Skeleton width={150} count={1}/></div>
+    //                     </div>
+    //                   </div>
+    //                   <div className="item-render-right">  <Skeleton count={1}  width={30} /></div>
+    //                 </div>
+    //                 ))
+    //               }
+
+    //             </>
+
+    //           : searchData?.length > 1 ? searchData?.map((item) => {
+    //             return (
+    //               <div key={item.id} className="item-render">
+    //                 <div className="item-render-left">
+    //                   <img
+    //                     src={item.imageUrl}
+    //                     alt="none"
+    //                   />
+    //                   <div className="left-column">
+    //                     <Link to="#">{item.title}</Link>
+    //                     <div>{item.cateCode.value}</div>
+    //                   </div>
+    //                 </div>
+    //                 <div className="item-render-right">{item.price}$</div>
+    //               </div>
+    //             );
+    //           } ) : <div> not found, please type again</div>}
+    //         </div>
+    //       </Modal>
+    //     </>
+    //   </MDBContainer>
+    // </MDBNavbar>
+    <div className="header">
+      <div className="navbar-header">
+        <div className="navbar-brand">
+          <span class='menu-mobile' onClick={() => setIsMobile(prev => !prev)}><AiOutlineMenu size={24} /></span>
+          <span onClick={() => navigate('/')} style={{cursor:'pointer'}}><img src={logo} alt="" /></span>
+        </div>
+        <div className="navbar-search">
+          <Input onClick={showModal} className='input-search' placeholder="Search book"></Input>
           <Modal
             style={{ zIndex: 99999 }}
             title="Search Book"
@@ -146,6 +298,7 @@ export default function Navigate() {
               <input
                 type="text"
                 className="form-control"
+                autoComplete="off"
                 onChange={handleChange}
                 name="name"
                 placeholder="Type to search"
@@ -153,40 +306,178 @@ export default function Navigate() {
               />
               {/* <MDBBtn color='primary' type='submit'>Search</MDBBtn> */}
             </form>
-            <div className="data-search" >
-              {isLoading ? 
-               <div  className="item-render">
-               <div className="item-render-left">
-                <Skeleton circle width={80} height={80} />
-                 <div className="left-column">
-                   <Link to="#">  <Skeleton  width={150} /></Link>
-                   <div>  <Skeleton width={150}/></div>
-                 </div>
-               </div>
-               <div className="item-render-right">  <Skeleton  width={30} /></div>
-             </div>
-              
-              : searchData?.length > 1 ? searchData?.map((item) => {
-                return (
-                  <div key={item.id} className="item-render">
-                    <div className="item-render-left">
-                      <img
-                        src={item.imageUrl}
-                        alt="none"
-                      />
-                      <div className="left-column">
-                        <Link to="#">{item.title}</Link>
-                        <div>{item.cateCode.value}</div>
+            <div className="data-search">
+              {isLoading ? (
+                <>
+                  {[1, 2, 3].map((item) => (
+                    <div className="item-render-mt">
+                      <div className="item-render-left">
+                        <Skeleton circle width={80} height={80} count={1} />
+                        <div className="left-column">
+                          <Link to="#">
+                            {" "}
+                            <Skeleton width={150} count={1} />
+                          </Link>
+                          <div>
+                            {" "}
+                            <Skeleton width={150} count={1} />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="item-render-right">
+                        {" "}
+                        <Skeleton count={1} width={30} />
                       </div>
                     </div>
-                    <div className="item-render-right">{item.price}$</div>
-                  </div>
-                );
-              } ) : <div> not found, please type again</div>}
+                  ))}
+                </>
+              ) : searchData?.length > 1 ? (
+                searchData?.map((item) => {
+                  return (
+                    <div key={item.id} className="item-render">
+                      <div className="item-render-left">
+                        <img src={item.imageUrl} alt="none" />
+                        <div className="left-column">
+                          <Link to="#">{item.title}</Link>
+                          <div>{item.cateCode.value}</div>
+                        </div>
+                      </div>
+                      <div className="item-render-right">{item.price}$</div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div> not found, please type again</div>
+              )}
             </div>
           </Modal>
-        </>
-      </MDBContainer>
-    </MDBNavbar>
+        </div>
+        <div className="navbar-account">
+          {
+            <div
+              className={`${
+                isDropdown ? "user-welcome active" : "user-welcome"
+              }`}
+              onClick={() => setIsDropdown((prev) => !prev)}
+            >
+              <div className="user-welcome-right">
+                <img src={currentUser?.avatar} alt="Your account" />
+                <span> {currentUser?.name}</span>
+              </div>
+              <div className={`${cartItems.length > 0 ? 'notify' : 'none'}`}></div>
+              <div className="user-welcome-left">
+                {!isDropdown ? (
+                  <RiArrowDropDownLine size={32} />
+                ) : (
+                  <RiArrowDropUpLine size={32} />
+                )}
+              </div>
+              <div className="content">
+                {currentUser?.roleData?.code === "R1" && (
+                  <div
+                    className="content-item"
+                    id="order"
+                    onClick={handleAdmin}
+                  >
+                    <MdAdminPanelSettings />
+                    Admin Panel
+                  </div>
+                )}
+                <div
+                  className="content-item"
+                  id="order"
+                  onClick={() => navigate("/order-info")}
+                >
+                  <VscPackage />
+                  Your Orders <span className="order-notify">{cartItems.length || 0}</span>
+                </div>
+                <div
+                  className="content-item"
+                  onClick={() => navigate("/user-info")}
+                >
+                  <BiUser />
+                  <span>User Information</span>
+                </div>
+                <div className="content-auth">
+                  <div className={isLogged ? "auth logout" : "auth"}>
+                    <div onClick={() => handleLogout()}>
+                      {isLogged ? <div>Sign Out</div> : "Sign in"}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+      <div className="navbar-search-mobile">
+          <Input onClick={showModal} className='input-search' placeholder="Search book"></Input>
+          <Modal
+            style={{ zIndex: 99999 }}
+            title="Search Book"
+            open={isModalOpen}
+            onOk={handleOk}
+            onCancel={handleCancel}
+          >
+            <form className="d-flex input-group w-auto" method="POST">
+              <input
+                type="text"
+                className="form-control"
+                autoComplete="off"
+                onChange={handleChange}
+                name="name"
+                placeholder="Type to search"
+                aria-label="Search"
+              />
+              {/* <MDBBtn color='primary' type='submit'>Search</MDBBtn> */}
+            </form>
+            <div className="data-search">
+              {isLoading ? (
+                <>
+                  {[1, 2, 3].map((item) => (
+                    <div className="item-render-mt">
+                      <div className="item-render-left">
+                        <Skeleton circle width={80} height={80} count={1} />
+                        <div className="left-column">
+                          <Link to="#">
+                            {" "}
+                            <Skeleton width={150} count={1} />
+                          </Link>
+                          <div>
+                            {" "}
+                            <Skeleton width={150} count={1} />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="item-render-right">
+                        {" "}
+                        <Skeleton count={1} width={30} />
+                      </div>
+                    </div>
+                  ))}
+                </>
+              ) : searchData?.length > 1 ? (
+                searchData?.map((item) => {
+                  return (
+                    <div key={item.id} className="item-render">
+                      <div className="item-render-left">
+                        <img src={item.imageUrl} alt="none" />
+                        <div className="left-column">
+                          <Link to="#">{item.title}</Link>
+                          <div>{item.cateCode.value}</div>
+                        </div>
+                      </div>
+                      <div className="item-render-right">{item.price}$</div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div> not found, please type again</div>
+              )}
+            </div>
+          </Modal>
+        </div>
+        <ListNavbar isMobile={isMobile} setIsMobile={setIsMobile}/>
+    </div>
   );
 }

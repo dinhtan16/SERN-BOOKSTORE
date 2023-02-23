@@ -1,6 +1,7 @@
 import React from "react";
-import {useDispatch, useSelector} from 'react-redux'
-import {useNavigate} from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   MDBBtn,
   MDBContainer,
@@ -12,34 +13,157 @@ import {
   MDBCheckbox,
   MDBIcon,
 } from "mdb-react-ui-kit";
-import { registerUser } from '../store/slices/authSlice';
+import { registerUser, setLogOut } from "../store/slices/authSlice";
+import { useEffect } from "react";
 
 function Register() {
   let payloadInit = {
-    name:"",
-    email:"",
-    password:""
-  }
-  const [payload,setPayload] = React.useState(payloadInit)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  // const msg =useSelector(state => state.auth.msg)
-  // console.log(msg)
-  // const token =useSelector(state => state.auth?.token)
-  // const errCode =useSelector(state => state.auth?.errCode)
-  
+    name: "",
+    email: "",
+    password: "",
+    phone: '',
+    address: "",
+
+  };
+  const [payload, setPayload] = React.useState(payloadInit);
+  const [inputInvalid, setInputInvalid] = React.useState([]);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLogged = useSelector(state => state.auth.isLoggedIn)
+
   // console.log(location)
   const handleChangeInput = (e) => {
-    setPayload({...payload,[e.target.name]:e.target.value})
-  }
+    setPayload({ ...payload, [e.target.name]: e.target.value });
+  };
   const handleSubmit = async (e) => {
-    e.preventDefault()
-   await dispatch(registerUser(payload))
-    setPayload(payloadInit)  
-    
-  
-  }
+    e.preventDefault();
+    const invalids = validate(payload);
+    if(invalids === 0) {
+      const res = await dispatch(registerUser(payload))
+      setPayload(payloadInit)
+      // console.log(res?.payload)
+     if(res?.payload.err === 0){
+      toast.success(res?.payload.msg, {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+           navigate('/api/books/all')
+     }else{
+      toast.error(res?.payload.msg, {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+     }
+    }else{
+      toast.error('Please try again', {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    }
 
+  };
+
+  const validate = (payload) => {
+    let invalid = 0;
+    
+    const inputFields = Object.entries(payload);
+
+    inputFields.forEach((item) => {
+      if (item[1] === "") {
+        setInputInvalid((prev) => [
+          ...prev,
+          {
+            name: item[0],
+            msg: "Cannot be empty!",
+          },
+        ]);
+        invalid++;
+      }
+    
+    });
+    inputFields.forEach((item) => {
+      switch (item[0]) {
+        case "name": {
+          if (item[1].length < 6) {
+            setInputInvalid((prev) => [
+              ...prev,
+              {
+                name: item[0],
+                msg: "FullName must be from 6 characters",
+              },
+            ]);
+            invalid++;
+          }
+          break;
+        }
+        case "email": {
+          let emailFormat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+          if (
+              !item[1].match(emailFormat)
+          ){
+            setInputInvalid((prev) => [
+              ...prev,
+              {
+                name: item[0],
+                msg: "Email invalid",
+              },
+            ]);
+            invalid++;
+          }
+        }
+        break;
+
+        case "password": {
+          if (item[1].length < 6) {
+            setInputInvalid((prev) => [
+              ...prev,
+              {
+                name: item[0],
+                msg: "Password must from 6 characters",
+              },
+            ]);
+            invalid++;
+          }
+          break;
+        }
+        case "phone": {
+          if (!+item[1]) {
+            setInputInvalid((prev) => [
+              ...prev,
+              {
+                name: item[0],
+                msg: "Phone Must be Number",
+              },
+            ]);
+            invalid++;
+          }
+          break;
+        }
+        default:
+          break;
+      }
+    });
+    return invalid;
+  };
   return (
     <MDBContainer fluid className="p-4">
       <MDBRow>
@@ -67,47 +191,118 @@ function Register() {
         <MDBCol md="6">
           <MDBCard className="my-5">
             <MDBCardBody className="p-5">
-          <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit}>
                 <MDBRow>
-                  
                   <MDBCol col="6">
                     <MDBInput
-                      wrapperClass="mb-4"
+                    onFocus={() => setInputInvalid([])}
+                      wrapperClass='mt-4'
                       label="Full name"
-                      placeholder="Must be 3 - 16 characters"
                       id="form1"
                       type="text"
+                      autoComplete="off"
                       name="name"
                       value={payload.name}
                       onChange={handleChangeInput}
-                      pattern="\w{3,16}" required
                     />
+                    {inputInvalid.length > 0 &&
+                      inputInvalid.some((item) => item.name === "name") && (
+                        <small
+                          style={{
+                            color: "red",
+                            fontStyle: "italic",
+                            margin: "5px 0",
+                          }}
+                        >
+                          {
+                            inputInvalid.find((item) => item.name === "name")
+                              ?.msg
+                          }
+                        </small>
+                      )}
                   </MDBCol>
                 </MDBRow>
-  
+
                 <MDBInput
-                  wrapperClass="mb-4"
+                onFocus={() => setInputInvalid([])}
+                  wrapperClass='mt-4'
                   label="Email"
                   id="form1"
-                  type="email"
+                  type="text"
                   name="email"
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                   value={payload.email}
                   onChange={handleChangeInput}
-                  required
+                />
+                {inputInvalid.length > 0 &&
+                  inputInvalid.some((item) => item.name === "email") && (
+                    <small
+                      style={{
+                        color: "red",
+                        fontStyle: "italic",
+                        margin: "5px 0",
+                      }}
+                    >
+                      {inputInvalid.find((item) => item.name === "email")?.msg}
+                    </small>
+                  )}
+                    <MDBInput
+                onFocus={() => setInputInvalid([])}
+                  wrapperClass='mt-4'
+                  label="Phone Number"
+                  id="form1"
+                  type="text"
+                  name="phone"
+                  value={payload.phone}
+                  onChange={handleChangeInput}
+                />
+                    {inputInvalid.length > 0 &&
+                  inputInvalid.some((item) => item.name === "phone") && (
+                    <small
+                      style={{
+                        color: "red",
+                        fontStyle: "italic",
+                        margin: "5px 0",
+                      }}
+                    >
+                      {inputInvalid.find((item) => item.name === "phone")?.msg}
+                    </small>
+                  )}
+                  <MDBInput
+                onFocus={() => setInputInvalid([])}
+                  wrapperClass='mt-4'
+                  label="Address"
+                  id="form1"
+                  type="text"
+                  name="address"
+                  value={payload.address}
+                  onChange={handleChangeInput}
                 />
                 <MDBInput
-                  wrapperClass="mb-4"
+                onFocus={() => setInputInvalid([])}
+                  wrapperClass='mt-4'
                   label="Password"
                   id="form1"
                   type="password"
                   name="password"
-                  pattern="\w{3,16}" required
                   value={payload.password}
                   onChange={handleChangeInput}
                 />
-  
-                <div className="d-flex justify-content-center mb-4">
+                {inputInvalid.length > 0 &&
+                  inputInvalid.some((item) => item.name === "password") && (
+                    <small
+                      style={{
+                        color: "red",
+                        fontStyle: "italic",
+                        margin: "10px 0",
+                      }}
+                    >
+                      {
+                        inputInvalid.find((item) => item.name === "password")
+                          ?.msg
+                      }
+                    </small>
+                  )}
+                <div className="d-flex justify-content-center mt-4">
                   <MDBCheckbox
                     name="flexCheck"
                     value=""
@@ -115,12 +310,11 @@ function Register() {
                     label="Subscribe to our newsletter"
                   />
                 </div>
-  
-                <MDBBtn className="w-100 mb-4" size="md" type="submit">
+
+                <MDBBtn className="w-100 mt-4" size="md" type="submit">
                   sign up
                 </MDBBtn>
-
-            </form>  
+              </form>
               <div className="text-center">
                 <p>or sign up with:</p>
 
@@ -161,7 +355,7 @@ function Register() {
                 </MDBBtn>
               </div>
               <div>
-                Have account ? <a href="login">Login Now</a>
+                Have account ? <Link  to="/login">Login Now</Link>
               </div>
             </MDBCardBody>
           </MDBCard>

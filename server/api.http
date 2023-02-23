@@ -2,7 +2,7 @@ POST   http://localhost:8344/api/login/
 Content-Type : application/json
 
 {
-    "email": "tanJwtTest@gmail.com",
+    "email": "thanh@gmail.vn",
     "password":"123456"
 }
 
@@ -11,17 +11,14 @@ POST   http://localhost:8344/api/register/
 Content-Type : application/json
 
 {
-    "email": "tanJwtTest@gmail.com",
+    "email": "avatar@gmail.com",
     "password":"123456",
-    "name":"tann"
+    "name":"tannnnn"
 }
 
 ###
 GET http://localhost:8344/api/user/
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJ0YW5Kd3RUZXN0QGdtYWlsLmNvbSIsInJvbGVDb2RlIjoiUjIiLCJpYXQiOjE2NzU0MzgzOTEsImV4cCI6MTY3NTg3MDM5MX0.0jM7XaiYYiBOuH_u0aRVsWVRRLHdxf4Cm7zQtSJsqPQ
-
-
-
+Authorization:bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsIm5hbWUiOiJ0YW4iLCJyb2xlQ29kZSI6IlIzIiwiaWF0IjoxNjc2OTA1NTYxLCJleHAiOjE2NzY5OTE5NjF9.mwFHC7eeFgCLS4A2NsC5SknoR9lB1n6Ekl7OP2UBgEo
 ###
 GET http://localhost:8344/api/insert/
 
@@ -40,15 +37,35 @@ GET http://localhost:8344/api/books/?price=40&price=50&limit=5
 GET http://localhost:8344/api/books/?price=40&price=50
 
 ###
-POST http://localhost:8344/api/book/create
+POST   http://localhost:8344/api/login/
 Content-Type : application/json
 
 {
-    "id":"123",
-    "title": "tan test",
-    "price":"123",
-    "available":"123",
-    "category_code":"IH17",
-    "image_sId":"123"
-
+    "email": "tanJwtTest@gmail.com",
+    "password":"123456"
 }
+###
+# POST http://localhost:8344/api/book/create
+# Content-Type : application/json
+
+# {
+#     "title": "tan test 3",
+#     "price":"123",
+#     "available":"1",
+#     "category_code":"IH17",
+#     "image_sId":"123",
+#     "description":"tan"
+# }
+###
+# GET http://localhost:8344/admin
+# Authorization:bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImVtYWlsIjoidGhhbmhAZ21haWwudm4iLCJuYW1lIjoidGhhbmggIG5lIiwicm9sZUNvZGUiOiJSMyIsImlhdCI6MTY3NzAzNzg3NywiZXhwIjoxNjc3MTI0Mjc3fQ.HfKOZsdzBa3Qa7Ud0yhcPxWyH9-3jpsxlr5XGj6RHUo
+
+###
+# GET http://localhost:8344/my-cart
+# Authorization:bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImVtYWlsIjoidGhhbmhAZ21haWwudm4iLCJuYW1lIjoidGhhbmggIG5lIiwicm9sZUNvZGUiOiJSMSIsImlhdCI6MTY3NzA0MDI1MSwiZXhwIjoxNjc3MTI2NjUxfQ.19uf6XdOlDjYX0yxctwhoOTPeFn24SaEBJ7traUw-nE
+# Content-Type: application/json
+
+# {
+#     "userId":"17"
+# }
+

@@ -44,6 +44,9 @@ module.exports = {
         type: "TIMESTAMP",
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
+      fileName: {
+        type: Sequelize.STRING,
+      },
     });
   },
   async down(queryInterface, Sequelize) {

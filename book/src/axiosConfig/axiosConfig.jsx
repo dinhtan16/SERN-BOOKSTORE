@@ -1,13 +1,24 @@
 import axios from 'axios'
 
-const instance = axios.create({
+
+
+  const instance = axios.create({
     baseURL: process.env.REACT_APP_SERVER_URL,
+  
   });
 // Add a request interceptor
 
 instance.interceptors.request.use(function (config) {
     // Do something before request is sent
     //TODO: gan token vao header de goi api
+      const userToken = localStorage.getItem('persist:auth') &&  JSON.parse(localStorage.getItem('persist:auth'))?.token?.slice(1,-1)
+      config.headers = {
+        authorization : userToken ? userToken : null
+      }
+
+    
+
+
     return config;
   }, function (error) {
     // Do something with request error

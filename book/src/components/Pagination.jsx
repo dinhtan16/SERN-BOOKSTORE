@@ -5,7 +5,7 @@ import {  useSelector } from 'react-redux'
 import { memo } from "react";
 // import { useEffect } from "react";
 
-const PaginationComponent = ({itemPerPage}) => {
+const PaginationComponent = () => {
   const [searchParams] = useSearchParams()
   const page =+searchParams.get('page')
   const totalBookLimit = useSelector(state => state.books.allBookLimit?.bookData?.count)
