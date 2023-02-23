@@ -43,6 +43,10 @@ const list = [
 ];
 const ListNavbar = ({ setIsMobile, isMobile }) => {
   const navigate = useNavigate();
+  const handleMenu = () =>{
+    navigate("/api/books/all")
+    setIsMobile(false)
+  }
   return (
     <>
       <div className={`${isMobile && "overlay"}`}></div>
@@ -53,11 +57,11 @@ const ListNavbar = ({ setIsMobile, isMobile }) => {
       >
         {list.map((item) => {
           return (
-            <>
+            <div key={item.id}>
               <span
-                key={item.id}
+                
                 className="categories-list-item"
-                onClick={() => navigate("/api/books/all")}
+                onClick={handleMenu}
               >
                 {item.name}
                 <section className="mega-menu">
@@ -73,7 +77,7 @@ const ListNavbar = ({ setIsMobile, isMobile }) => {
                 
                 </section>
               </span>
-            </>
+            </div>
           );
         })}
         <div

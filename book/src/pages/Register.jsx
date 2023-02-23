@@ -229,6 +229,7 @@ function Register() {
                   label="Email"
                   id="form1"
                   type="text"
+                  placeholder="Only accept .vn .com .org"
                   name="email"
                   value={payload.email}
                   onChange={handleChangeInput}

@@ -56,10 +56,10 @@ const Cart = () => {
       <div className="order-info">
         <section className="delivery">
           <div className="title">
-            <span style={{ fontWeight: "bold" }}>Delivery Information.</span> You
+            <p style={{ fontWeight: "bold" }}>Delivery Information.</p> You
             can Edit in{" "}
             <span
-              style={{ cursor: "pointer", color: "red" }}
+              style={{ cursor: "pointer", color: "#3D5962" ,textDecoration:'underline'}}
               onClick={() => navigate("/user-info")}
             >
               Your information

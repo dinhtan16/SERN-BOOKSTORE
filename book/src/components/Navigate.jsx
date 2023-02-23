@@ -153,8 +153,8 @@ export default function Navigate() {
             <div className="data-search">
               {isLoading ? (
                 <>
-                  {[1, 2, 3].map((item) => (
-                    <div className="item-render-mt">
+                  {[1, 2, 3].map((item,i) => (
+                    <div className="item-render-mt" key={i}>
                       <div className="item-render-left">
                         <Skeleton circle width={80} height={80} count={1} />
                         <div className="left-column">
@@ -284,8 +284,8 @@ export default function Navigate() {
             <div className="data-search">
               {isLoading ? (
                 <>
-                  {[1, 2, 3].map((item) => (
-                    <div className="item-render-mt">
+                  {[1, 2, 3].map((item,i) => (
+                    <div className="item-render-mt" key={i}>
                       <div className="item-render-left">
                         <Skeleton circle width={80} height={80} count={1} />
                         <div className="left-column">

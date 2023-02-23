@@ -16,7 +16,6 @@ const DetailBook = () => {
   const bookData = useSelector((state) => state.books.bookDetail);
   const allBookMayLike = useSelector(state => state.books.allBook)
   // setMayLike(allBookMayLike?.slice(0,6))
-  console.log(allBookMayLike)
   React.useEffect(() => {
     const fetch = async () => {
      let ramdom =   Math.floor(Math.random() * 10);

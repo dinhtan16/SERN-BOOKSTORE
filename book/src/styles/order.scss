@@ -4,7 +4,7 @@
     display: grid;
     justify-content: center;
     margin-top: 2.2rem;
-    background: #f8f6f5;
+    background: #fdfcfc;
     grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
     gap: 2rem;
     padding: 20px;
@@ -53,8 +53,14 @@
                     outline: none;
                     border:none;
                     padding: 8px;
-                    background-color: #22331D;
+                    background-color: #3D5962;
                     color:#fff;
+                    transition: all .2s ease;
+                    &:hover{
+                        background-color: #fff;
+                        color:#3D5962;
+                        border:1px solid #3D5962;
+                    }
                 }
             }
         }
