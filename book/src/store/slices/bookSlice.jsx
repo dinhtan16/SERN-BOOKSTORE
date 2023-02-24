@@ -24,7 +24,6 @@ export const getAllBooksDefault = createAsyncThunk(
       // console.log(id)
       const res = await getAllBooks(data);
 
-      // console.log(res.data);
      
       return res?.data;
     } catch (error) {

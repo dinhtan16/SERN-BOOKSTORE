@@ -10,7 +10,8 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        
       },
       totalPrice: {
         type: Sequelize.FLOAT,defaultValue:0

@@ -1,5 +1,7 @@
 import React from 'react'
-import Banner from '../components/Home/Banner'
+import Banner from '../components/Header/Banner'
+import Hero from '../components/Home/Hero'
+import OneGetOne from '../components/Home/OneGetOne'
 
 const Home = () => {
   return (
@@ -7,6 +9,8 @@ const Home = () => {
    <>
       {/* <Banner /> */}
       {/* <ModalSuccess/> */}
+      <Hero />
+      <OneGetOne />
    </>
   )
 }

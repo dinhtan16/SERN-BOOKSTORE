@@ -3,9 +3,13 @@ import { v4 } from 'uuid';
 const { Op } = require("sequelize");
 export const createCart = (body) =>
   new Promise(async (resolve, reject) => {
+    const idNumber= v4().slice(0,6)
+    const bigIntValue = BigInt(
+        "0x" + idNumber.replace(/-/g, "")
+    );
       try {
         const response = await db.Cart.create({
-            id:v4().slice(0,2),
+            id:+bigIntValue.toString(),
             totalPrice:body.totalPrice,
             userId:body.userId,
             bookId:body.bookId,

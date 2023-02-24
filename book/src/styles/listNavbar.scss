@@ -45,6 +45,10 @@
                 cursor: pointer;
                 position: absolute;
                 top: 0px;
+                @media screen and (max-width:400px) {
+                right: 0px;
+                    
+                }
                 right: -48px;
                 padding: 11px;   
                 background-color: #fff;
@@ -56,6 +60,8 @@
                 }
             }
             .categories-list-item{
+                // width: 100%;
+                display: block!important;
                 border-bottom: 1px solid #AF9D69;
                 padding: 10px;
                 &:hover{

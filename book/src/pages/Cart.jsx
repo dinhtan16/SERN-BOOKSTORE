@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "../components/Cart/CartItem";
 import { Input } from "antd";
@@ -8,8 +8,22 @@ import { createCart } from "../services/cart";
 import { setEmpty } from "../store/slices/cartSlice";
 import ModalSuccess from "../components/Orders/ModalSuccess";
 import { setOpenModal } from "../store/slices/modalOpen";
-
+import {toast} from 'react-toastify'
+import {  Modal } from 'antd';
 const Cart = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+ 
+  const handleOk = () => {
+    handleSubmitCart()
+    setIsModalOpen(false);
+
+  }
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+
   const navigate = useNavigate();
   const dispatch = useDispatch()
 
@@ -21,7 +35,6 @@ const Cart = () => {
 
   let total = +totalAmount
   let number = 13.2
-  console.log( +(total + number).toFixed(2))
 
   const bookId = cartItems?.map((item) => item.id);
   const bookIdList = bookId?.join(",");
@@ -45,11 +58,27 @@ const Cart = () => {
         dispatch(setOpenModal(true))
         
       }
-      console.log(res);
     } catch (err) {
       console.log(err);
     }
   };
+  const handleLoginOrder = () => {
+    toast.warning('You must to Login to buy and Follow your Order', {
+      position: "bottom-center",
+      autoClose: 300,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+
+      setTimeout(() => {
+      navigate('/login')
+
+      },1000) 
+  }
   return (
     <>
      {  isOpenModal && <ModalSuccess/> }
@@ -140,7 +169,8 @@ const Cart = () => {
               </div>
             </div>
             <div className="order-btn">
-              <button onClick={handleSubmitCart}>Confirm Order</button>
+            <Modal title="Confirm Order" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>Are you sure to Order?</Modal>
+              {userInfo.id ? <button onClick={() => setIsModalOpen(true)}>Confirm Order</button> : <button onClick={handleLoginOrder}>Confirm Order</button>  }
             </div>
           </div>
         </section>

@@ -1,0 +1,17 @@
+.user-manger{
+    padding: 2em;
+    &-title{
+        color:#00a956;
+        font-size: 2em;
+        font-weight: bold;
+    }
+    .action{
+        display: flex;
+        gap:1rem;
+        outline: none;
+        button{
+            border:none;
+            background-color: transparent;
+        }
+    }
+}

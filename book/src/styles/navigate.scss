@@ -1,6 +1,14 @@
+@media screen and (max-width:990px) {
+    .top-header{
+        display: none !important;
+    }
+}
 .headers{
     padding: 0 10px;
-    
+    .top-header{
+     font-family: 'Source Serif Pro', serif !important; 
+
+    }
     &-navbar{
         display: flex ;
         justify-content: space-between !important;

@@ -7,14 +7,26 @@
   gap:1rem;
   flex-wrap: wrap;
   font-family: "Source Serif Pro", serif !important;
+  .book-section{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    .book-detail-img{
+      width: 50%;
+      flex-shrink: 0;
+
+      // align-self: flex-end;
+    }
+  }
   &-img {
     // width: 100%;
     img {
       object-fit: cover;
-      width: 100%;
+      width: 90%;
     }
   }
   &-info {
+    flex:1;
     padding: 15px;
     // justify-self: flex-end !important;
     &-name {

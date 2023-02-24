@@ -5,10 +5,9 @@ import { getAllBooksDefault, getOneBook } from "../store/slices/bookSlice";
 import "../styles/detailBook.scss";
 import { RiVipCrownLine } from "react-icons/ri";
 import { BsCoin } from "react-icons/bs";
-import { MdOutlineLocalShipping, MdPlaylistAddCheck } from "react-icons/md";
+import { MdOutlineLocalShipping } from "react-icons/md";
 import { addCart } from "../store/slices/cartSlice";
 import { toast } from "react-toastify";
-import { useState } from "react";
 import BookItem from "../components/BookItem/BookItem";
 const DetailBook = () => {
   const { id } = useParams();
@@ -18,8 +17,8 @@ const DetailBook = () => {
   // setMayLike(allBookMayLike?.slice(0,6))
   React.useEffect(() => {
     const fetch = async () => {
-     let ramdom =   Math.floor(Math.random() * 10);
-     await  dispatch(getAllBooksDefault({ page:  +ramdom }));
+     let random =   Math.floor(Math.random() * 10);
+     await  dispatch(getAllBooksDefault({ page:  +random }));
     }
     fetch()
   }, [id]);
@@ -44,54 +43,56 @@ const DetailBook = () => {
   };
   return (
     <div className="book-detail">
-      <section className="book-detail-img">
-        <img src={bookData?.imageUrl} alt="" />
-      </section>
-      <section className="book-detail-info">
-        <p className="book-detail-info-name">{bookData?.title}</p>
-        <div className="book-detail-info-category">
-          Category :
-          <span style={{ color: "orange", marginLeft: 3, fontWeight: "bold" }}>
-            {bookData?.cateCode?.value}
-          </span>
-        </div>
-        <div className="book-detail-info-border"></div>
-        <div>Paperback(Reprint)</div>
-        <div className="book-detail-info-price">${bookData?.price}</div>
-        <div className="book-detail-info-premium">
-          <div>
-            <RiVipCrownLine size={24} />
-          </div>
-          <div>
-            {" "}
-            Premium Members Get an Additional 10% Off.
-            <span style={{ color: "#295A34", textDecoration: "underline" }}>
-              Learn more
+   <div className="book-section" >
+        <section className="book-detail-img">
+          <img src={bookData?.imageUrl} alt="image book" />
+        </section>
+        <section className="book-detail-info">
+          <p className="book-detail-info-name">{bookData?.title}</p>
+          <div className="book-detail-info-category">
+            Category :
+            <span style={{ color: "orange", marginLeft: 3, fontWeight: "bold" }}>
+              {bookData?.cateCode?.value}
             </span>
           </div>
-        </div>
-        <button className="book-detail-info-add" onClick={handleCart}>
-          ADD TO CART
-        </button>
-        <div className="book-detail-info-more">
-          <span>
-            <BsCoin size={18} />
-          </span>
-          <span>
-            B&N Rewards Members earn 1 stamp for every $10 spent in a
-            purchase!10 stamps = $5 reward
-          </span>
-        </div>
-        <div className="book-detail-info-more">
-          <span>
-            <MdOutlineLocalShipping size={18} />
-          </span>
-          <span>
-            Choose Expedited Shipping at checkout for delivery by Monday,
-            February 27
-          </span>
-        </div>
-      </section>
+          <div className="book-detail-info-border"></div>
+          <div>Paperback(Reprint)</div>
+          <div className="book-detail-info-price">${bookData?.price}</div>
+          <div className="book-detail-info-premium">
+            <div>
+              <RiVipCrownLine size={24} />
+            </div>
+            <div>
+              {" "}
+              Premium Members Get an Additional 10% Off.
+              <span style={{ color: "#295A34", textDecoration: "underline" }}>
+                Learn more
+              </span>
+            </div>
+          </div>
+          <button className="book-detail-info-add" onClick={handleCart}>
+            ADD TO CART
+          </button>
+          <div className="book-detail-info-more">
+            <span>
+              <BsCoin size={18} />
+            </span>
+            <span>
+              B&N Rewards Members earn 1 stamp for every $10 spent in a
+              purchase!10 stamps = $5 reward
+            </span>
+          </div>
+          <div className="book-detail-info-more">
+            <span>
+              <MdOutlineLocalShipping size={18} />
+            </span>
+            <span>
+              Choose Expedited Shipping at checkout for delivery by Monday,
+              February 27
+            </span>
+          </div>
+        </section>
+   </div>
       <section className="book-detail-description">
         <div className="overview">Overview</div>
         <div className="content">

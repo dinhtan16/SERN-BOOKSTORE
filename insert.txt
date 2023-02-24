@@ -1,3 +1,0 @@
-insert into roles (code,value) values ('R1','Admin');
-insert into roles (code,value) values ('R2','Client');
-insert into roles (code,value) values ('R3','Staff');

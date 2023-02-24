@@ -57,7 +57,6 @@ const Shop = () => {
     (state) => state.books?.allBookLimit?.bookData?.rows
   );
   const allBook = useSelector((state) => state.books?.allBook?.bookData?.rows);
-  // console.log(allBookCategory)
 
   React.useEffect(() => {
     dispatch(

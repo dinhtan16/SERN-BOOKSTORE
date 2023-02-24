@@ -18,7 +18,7 @@ import "../styles/navigate.scss";
 import logo from "../assets/imgs/logo.svg";
 import { toast } from "react-toastify";
 
-import {AiOutlineMenu} from 'react-icons/ai'
+import { AiOutlineMenu } from "react-icons/ai";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { VscPackage } from "react-icons/vsc";
 import { BiUser } from "react-icons/bi";
@@ -37,7 +37,7 @@ import { setLogOut } from "../store/slices/authSlice";
 import { setLogOutCurrentUser } from "../store/slices/userSlice";
 import { adminCheck } from "../services/AdminCheck";
 import { Input } from "antd";
-import ListNavbar from "./Home/ListNavbar";
+import ListNavbar from "./Header/ListNavbar";
 export default function Navigate() {
   const currentUser = useSelector((state) => state.user.currentUser);
   // console.log(currentUser?.roleData.code)
@@ -50,8 +50,8 @@ export default function Navigate() {
   const navigate = useNavigate();
 
   const isLogged = useSelector((state) => state.auth.isLoggedIn);
-  const cartItems = useSelector(state => state.cart.cartItems)
-  const orderInfo  = useSelector(state => state.order?.userOrders)
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const orderInfo = useSelector((state) => state.order?.userOrders);
 
   // const navigate = useNavigate();
   // const dispatch = useDispatch();
@@ -78,7 +78,7 @@ export default function Navigate() {
     let delay;
     const fetch = async () => {
       const res = await searchBooks({ name: debounce });
-      setSearchData(res?.data?.bookData.rows);
+      setSearchData(res?.data?.bookData?.rows);
 
       delay = setTimeout(() => {
         setIsLoading(false);
@@ -122,15 +122,32 @@ export default function Navigate() {
     }
   };
   return (
-
     <div className="headers">
+      <div style={{display:'flex',gap:"1em",padding:10,userSelect:'none'}} className='top-header'>
+        <span>Stores & Events</span> <span>|</span>{" "}
+        <span>Blog & Podcast</span> <span>| </span>
+        <span>Membership</span> <span>| </span>
+        <span>Coupons & Deals</span><span>|</span>
+        <span>Bestsellers</span> |<span>Gift Cards</span>
+      </div>
       <div className="headers-navbar">
         <div className="navbar-brand">
-          <span class='menu-mobile' onClick={() => setIsMobile(prev => !prev)}><AiOutlineMenu size={24} /></span>
-          <span onClick={() => navigate('/')} style={{cursor:'pointer'}}><img src={logo} alt="" /></span>
+          <span
+            class="menu-mobile"
+            onClick={() => setIsMobile((prev) => !prev)}
+          >
+            <AiOutlineMenu size={24} />
+          </span>
+          <span onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
+            <img src={logo} alt="" />
+          </span>
         </div>
         <div className="navbar-search">
-          <Input onClick={showModal} className='input-search' placeholder="Search book"></Input>
+          <Input
+            onClick={showModal}
+            className="input-search"
+            placeholder="Search book"
+          ></Input>
           <Modal
             style={{ zIndex: 99999 }}
             title="Search Book"
@@ -153,13 +170,13 @@ export default function Navigate() {
             <div className="data-search">
               {isLoading ? (
                 <>
-                  {[1, 2, 3].map((item,i) => (
+                  {[1, 2, 3].map((item, i) => (
                     <div className="item-render-mt" key={i}>
                       <div className="item-render-left">
                         <Skeleton circle width={80} height={80} count={1} />
                         <div className="left-column">
-                            {" "}
-                            <Skeleton width={150} count={1} />
+                          {" "}
+                          <Skeleton width={150} count={1} />
                           <div>
                             {" "}
                             <Skeleton width={150} count={1} />
@@ -179,8 +196,14 @@ export default function Navigate() {
                     <div key={item.id} className="item-render">
                       <div className="item-render-left">
                         <img src={item.imageUrl} alt="none" />
-                        <div className="left-column">
-                          <Link to={`/detail/${item.id}`} onClick={() => setIsModalOpen(false)} title={item.title}>{item.title}</Link>
+                        <div className="left-column" title={item.title}>
+                          <Link
+                            to={`/detail/${item.id}`}
+                            onClick={() => setIsModalOpen(false)}
+                            title={item.title}
+                          >
+                            {item.title}
+                          </Link>
                           <div>{item.cateCode.value}</div>
                         </div>
                       </div>
@@ -206,7 +229,9 @@ export default function Navigate() {
                 <img src={currentUser?.avatar} alt="Your account" />
                 <span> {currentUser?.name}</span>
               </div>
-              <div className={`${cartItems.length > 0 ? 'notify' : 'none'}`}></div>
+              <div
+                className={`${cartItems.length > 0 ? "notify" : "none"}`}
+              ></div>
               <div className="user-welcome-left">
                 {!isDropdown ? (
                   <RiArrowDropDownLine size={32} />
@@ -231,7 +256,8 @@ export default function Navigate() {
                   onClick={() => navigate("/cart")}
                 >
                   <VscPackage />
-                  Carts <span className="order-notify">{cartItems.length || 0}</span>
+                  Carts{" "}
+                  <span className="order-notify">{cartItems.length || 0}</span>
                 </div>
                 <div
                   className="content-item"
@@ -239,7 +265,8 @@ export default function Navigate() {
                   onClick={() => navigate("/your-order")}
                 >
                   <VscPackage />
-                  Your Orders <span className="order-notify">{orderInfo.length || 0}</span>
+                  Your Orders{" "}
+                  <span className="order-notify">{orderInfo.length || 0}</span>
                 </div>
                 <div
                   className="content-item"
@@ -261,73 +288,82 @@ export default function Navigate() {
         </div>
       </div>
       <div className="navbar-search-mobile">
-          <Input onClick={showModal} className='input-search' placeholder="Search book"></Input>
-          <Modal
-            style={{ zIndex: 99999 }}
-            title="Search Book"
-            open={isModalOpen}
-            onOk={handleOk}
-            onCancel={handleCancel}
-          >
-            <form className="d-flex input-group w-auto" method="POST">
-              <input
-                type="text"
-                className="form-control"
-                autoComplete="off"
-                onChange={handleChange}
-                name="name"
-                placeholder="Type to search"
-                aria-label="Search"
-              />
-              {/* <MDBBtn color='primary' type='submit'>Search</MDBBtn> */}
-            </form>
-            <div className="data-search">
-              {isLoading ? (
-                <>
-                  {[1, 2, 3].map((item,i) => (
-                    <div className="item-render-mt" key={i}>
-                      <div className="item-render-left">
-                        <Skeleton circle width={80} height={80} count={1} />
-                        <div className="left-column">
-                          <Link to="#">
-                            {" "}
-                            <Skeleton width={150} count={1} />
-                          </Link>
-                          <div>
-                            {" "}
-                            <Skeleton width={150} count={1} />
-                          </div>
+        <Input
+          onClick={showModal}
+          className="input-search"
+          placeholder="Search book"
+        ></Input>
+        <Modal
+          style={{ zIndex: 99999 }}
+          title="Search Book"
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        >
+          <form className="d-flex input-group w-auto" method="POST">
+            <input
+              type="text"
+              className="form-control"
+              autoComplete="off"
+              onChange={handleChange}
+              name="name"
+              placeholder="Type to search"
+              aria-label="Search"
+            />
+            {/* <MDBBtn color='primary' type='submit'>Search</MDBBtn> */}
+          </form>
+          <div className="data-search">
+            {isLoading ? (
+              <>
+                {[1, 2, 3].map((item, i) => (
+                  <div className="item-render-mt" key={i}>
+                    <div className="item-render-left">
+                      <Skeleton circle width={80} height={80} count={1} />
+                      <div className="left-column">
+                        <Link to="#">
+                          {" "}
+                          <Skeleton width={150} count={1} />
+                        </Link>
+                        <div>
+                          {" "}
+                          <Skeleton width={150} count={1} />
                         </div>
                       </div>
-                      <div className="item-render-right">
-                        {" "}
-                        <Skeleton count={1} width={30} />
+                    </div>
+                    <div className="item-render-right">
+                      {" "}
+                      <Skeleton count={1} width={30} />
+                    </div>
+                  </div>
+                ))}
+              </>
+            ) : searchData?.length > 1 ? (
+              searchData?.map((item) => {
+                return (
+                  <div key={item.id} className="item-render">
+                    <div className="item-render-left">
+                      <img src={item.imageUrl} alt="none" />
+                      <div className="left-column" title={item.title}>
+                        <Link
+                          to={`/detail/${item.id}`}
+                          onClick={() => setIsModalOpen(false)}
+                        >
+                          {item.title}
+                        </Link>
+                        <div>{item.cateCode.value}</div>
                       </div>
                     </div>
-                  ))}
-                </>
-              ) : searchData?.length > 1 ? (
-                searchData?.map((item) => {
-                  return (
-                    <div key={item.id} className="item-render">
-                      <div className="item-render-left">
-                        <img src={item.imageUrl} alt="none" />
-                        <div className="left-column">
-                          <Link to={`/detail/${item.id}`} onClick={() => setIsModalOpen(false)}>{item.title}</Link>
-                          <div>{item.cateCode.value}</div>
-                        </div>
-                      </div>
-                      <div className="item-render-right">{item.price}$</div>
-                    </div>
-                  );
-                })
-              ) : (
-                <div> not found, please type again</div>
-              )}
-            </div>
-          </Modal>
-        </div>
-        <ListNavbar isMobile={isMobile} setIsMobile={setIsMobile}/>
+                    <div className="item-render-right">{item.price}$</div>
+                  </div>
+                );
+              })
+            ) : (
+              <div> not found, please type again</div>
+            )}
+          </div>
+        </Modal>
+      </div>
+      <ListNavbar isMobile={isMobile} setIsMobile={setIsMobile} />
     </div>
   );
 }

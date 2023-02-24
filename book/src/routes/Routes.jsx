@@ -9,6 +9,9 @@ import UserInfo from '../pages/UserInfo'
 import Cart from '../pages/Cart'
 import YourOrder from '../pages/YourOrder'
 import DetailBook from '../pages/DetailBook'
+import UserManager from '../components/Admin/UserManager'
+import BookManager from '../components/Admin/BookManager'
+import AdminHome from '../components/Admin/AdminHome'
 
 //ko dang nhap van xem dc
 const publicRoutes = [
@@ -51,6 +54,21 @@ const publicRoutes = [
   {
     path: '/detail/:id',
     component: DetailBook,
+  },
+  {
+    path: '/admin/user',
+    component: UserManager,
+    layout:AdminPage,
+  },
+  {
+    path: '/admin/book-manager',
+    component: BookManager,
+    layout:AdminPage,
+  },
+  {
+    path: '/admin',
+    component: AdminHome,
+    layout: AdminPage,
   },
   {
     path: '/admin',

@@ -1,5 +1,5 @@
 // import user from './user'
-import {getCurrentUser, updateUserController} from '../controllers/userController.js'
+import {deleteUserController, getAllUserAdminRoleController, getCurrentUser, getOneUserAdminRoleController, updateUserController} from '../controllers/userController.js'
 import express from 'express'
 import  {authControllerLogin,authControllerRegister, refreshTokenController}  from '../controllers/authController.js'
 import { notFound } from '../../middlewares/handleErrors.js'
@@ -42,26 +42,33 @@ const router = express.Router()
     router.post('/cart-create',[verifyToken],createCartController)
     router.get('/my-cart',[verifyToken],getCartUserController)
 
+    
+    router.get('/api/insert',insertController)
+    router.get('/api/price',insertPriceController)
 
 
     //PRIVATE ROUTES // những route nằm dưới verify đều private
     // router.use(verifyToken)
     // router.use(verifyAdmin)
     router.get('/api/user',[verifyToken],getCurrentUser)
-    
-    router.get('/api/insert',insertController)
-    router.get('/api/price',insertPriceController)
     router.put('/api/update-user',[verifyToken],uploadCloud.single('avatar'),updateUserController)
 
-    router.post('/api/book/create',[verifyToken,verifyAdmin],uploadCloud.single('imageUrl'),insertBookController)
-    router.put('/api/book/update',[verifyToken,verifyAdmin],uploadCloud.single('imageUrl'),updateBookController)
-    router.delete('/api/book/delete',[verifyToken,verifyAdmin],deleteBookController)
+
+
 
 
     // router.use(verifyToken)
     // router.use(verifyModeratorAdmin) //verify role sau token
     router.get('/admin',[verifyToken,verifyAdmin],adminCheckController) //cách viết middleware thứ 2
+    router.get('/user/all',[verifyToken,verifyAdmin],getAllUserAdminRoleController)
+    router.delete('/delete-user',[verifyToken,verifyAdmin],deleteUserController)
+    router.post('/get-user',[verifyToken,verifyAdmin],getOneUserAdminRoleController)
 
+
+
+    router.post('/api/book/create',[verifyToken,verifyAdmin],insertBookController)
+    router.put('/api/book/update',[verifyToken,verifyAdmin],updateBookController)
+    router.delete('/api/book/delete',[verifyToken,verifyAdmin],deleteBookController)
 
     // app.use(notFound)
 

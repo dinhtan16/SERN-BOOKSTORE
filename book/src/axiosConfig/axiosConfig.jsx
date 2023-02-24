@@ -13,7 +13,7 @@ instance.interceptors.request.use(function (config) {
     //TODO: gan token vao header de goi api
       const userToken = localStorage.getItem('persist:auth') &&  JSON.parse(localStorage.getItem('persist:auth'))?.token?.slice(1,-1)
       config.headers = {
-        authorization : userToken ? userToken : null
+        authorization :userToken ? userToken : null
       }
 
     
