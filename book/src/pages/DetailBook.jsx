@@ -9,6 +9,7 @@ import { MdOutlineLocalShipping } from "react-icons/md";
 import { addCart } from "../store/slices/cartSlice";
 import { toast } from "react-toastify";
 import BookItem from "../components/BookItem/BookItem";
+import SliderProduct from '../components/Home/SliderProduct'
 const DetailBook = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
