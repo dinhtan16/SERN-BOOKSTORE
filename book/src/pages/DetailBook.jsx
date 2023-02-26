@@ -10,6 +10,9 @@ import { addCart } from "../store/slices/cartSlice";
 import { toast } from "react-toastify";
 import BookItem from "../components/BookItem/BookItem";
 const DetailBook = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { id } = useParams();
   const dispatch = useDispatch();
   const bookData = useSelector((state) => state.books.bookDetail);

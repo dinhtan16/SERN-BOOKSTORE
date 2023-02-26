@@ -303,14 +303,7 @@ function Register() {
                       }
                     </small>
                   )}
-                <div className="d-flex justify-content-center mt-4">
-                  <MDBCheckbox
-                    name="flexCheck"
-                    value=""
-                    id="flexCheckDefault"
-                    label="Subscribe to our newsletter"
-                  />
-                </div>
+            
 
                 <MDBBtn className="w-100 mt-4" size="md" type="submit">
                   sign up

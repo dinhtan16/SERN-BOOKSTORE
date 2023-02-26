@@ -37,6 +37,9 @@ const UserInfo = () => {
         setPayload({...payload,[e.target.name]:e.target.value})
     
     }
+    React.useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
     const handleUpdate =async () => {
       const invalids = validate(payload,setInputInvalid)
        if(invalids === 0) {

@@ -22,10 +22,12 @@ const publicRoutes = [
   {
       path: '/login',
       component: Login,
+      layout:NoHeader
   },
   {
       path: '/register',
       component: Register,
+      layout:NoHeader
   },
   {
       path: '/api/books',

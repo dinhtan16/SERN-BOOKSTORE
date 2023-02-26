@@ -44,7 +44,10 @@
     color:#fff !important;
     border-radius: 0 !important;
     // width: 20px !important;
-    font-size: 20px !important;
+    &::after{
+      font-size: 25px !important;
+      font-weight: bold;
+    }
   }
   #swiper-cate .swiper-button-prev{
     color:#333 !important;

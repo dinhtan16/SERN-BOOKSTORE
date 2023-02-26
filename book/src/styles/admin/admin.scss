@@ -66,3 +66,37 @@
 
   }
 }
+.admin{
+  margin: 0 auto;
+}
+.admin-container-welcome{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  .admin-welcome{
+    background-color: rgb(242, 237, 237);
+    padding: 30px;
+    border-radius: 10px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    div:nth-child(1){
+      font-size: 3.3em;
+      color: #2eca7f;
+      font-weight: bold;
+    }
+    div:nth-child(2){
+      font-size: 2em;
+      font-weight: bold;
+    }
+  }
+  .admin-img{
+    padding: 20px;
+
+    img{
+      width: 450px;
+    }
+  }
+
+}

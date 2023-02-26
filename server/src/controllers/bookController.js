@@ -98,13 +98,11 @@ export const updateBookController = async (req, res) => {
 export const deleteBookController = async (req, res) => {
   try {
     // console.log(fileData)
-    const { error } = Joi.object({ ids ,fileName}).validate(req.query);
+    console.log(req.query)
 
-    if (error) {
-      return BadRequest(error.details[0].message, res);
-    }
+  
 
-    const response = await deleteBook(req.query.ids,req.query.fileName);
+    const response = await deleteBook(req.query);
     return res.status(200).json(response);
   } catch (error) {
     console.log(error);

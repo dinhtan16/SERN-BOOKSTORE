@@ -57,7 +57,9 @@ const Shop = () => {
     (state) => state.books?.allBookLimit?.bookData?.rows
   );
   const allBook = useSelector((state) => state.books?.allBook?.bookData?.rows);
-
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   React.useEffect(() => {
     dispatch(
       getAllBooksDataLimit({

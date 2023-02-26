@@ -4,6 +4,9 @@ import { getUserOrder } from '../store/slices/orderSlice'
 import {Input, Table} from 'antd'
 import '../styles/followOrder.scss'
 const YourOrder = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const dispatch = useDispatch()
   const orderInfo  = useSelector(state => state.order?.userOrders)
   let totalEstimate =  orderInfo?.map(item => item.totalPrice).reduce((total,item) => {return total + item},0) 
@@ -31,7 +34,7 @@ const YourOrder = () => {
 
     },
     {
-      title: 'Total Quantity',
+      title: 'Unique Book',
       dataIndex: 'totalQuantity',
       key: 'totalQuantity',
     },
@@ -80,7 +83,7 @@ const YourOrder = () => {
           <div className='order-search'>
             <Input />
           </div>
-          <div className='table'>
+          <div className='table' style={{overflow:'auto'}}>
           <Table dataSource={orderInfo} columns={columns} pagination={false}/>
           </div>
         </div>

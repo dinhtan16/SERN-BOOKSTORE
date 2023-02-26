@@ -121,8 +121,26 @@ export default function Navigate() {
       console.log(err);
     }
   };
+
+  //sticky nav
+  const [stickyClass, setStickyClass] = useState('relative');
+
+  useEffect(() => {
+    window.addEventListener('scroll', stickNavbar);
+
+    return () => {
+      window.removeEventListener('scroll', stickNavbar);
+    };
+  }, []);
+
+  const stickNavbar = () => {
+    if (window !== undefined) {
+      let windowHeight = window.scrollY;
+      windowHeight > 80 ? setStickyClass('sticky-nav') : setStickyClass('relative');
+    }
+  };
   return (
-    <div className="headers">
+    <div className={`headers ${stickyClass}`}>
       <div style={{display:'flex',gap:"1em",padding:10,userSelect:'none'}} className='top-header'>
         <span>Stores & Events</span> <span>|</span>{" "}
         <span>Blog & Podcast</span> <span>| </span>

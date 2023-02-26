@@ -4,7 +4,7 @@ import { addCart } from '../../store/slices/cartSlice'
 import '../../styles/bookItem.scss'
 import {toast} from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-const BookItem = ({data}) => {
+const BookItem = ({data,right}) => {
     // console.log(data)
     const dispatch=useDispatch()
     const navigate = useNavigate()
@@ -23,10 +23,10 @@ const BookItem = ({data}) => {
     }
   return (
     <div className='item-book'>
-        <div className='item-top'>
+        <div className={`${right ? 'item-top right' : 'item-top'}`}>
             <img src={data.imageUrl} alt="none" />
         </div>
-        <div className='item-bottom'>
+        <div className={`${right ? 'item-bottom right' : 'item-bottom'}`}>
         <div className='item-title' title={data.title} onClick={() => navigate(`/detail/${data.id}`)} style={{cursor:'pointer'}}>
             <div className='title'>{data.title}</div>
 

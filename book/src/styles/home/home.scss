@@ -1,0 +1,29 @@
+.home-font{
+font-family: 'Source Serif Pro', serif !important; 
+}
+.footer-icon{
+    max-width: 1400px;
+    overflow: scroll;
+    display: flex;
+    transform: scale(0.6);
+    img{
+    }
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 10px;
+        cursor: pointer;
+      }
+       
+      &::-webkit-scrollbar-track {
+        width: 0;
+        cursor: pointer !important;
+
+      }
+       
+      &::-webkit-scrollbar-thumb {
+        background-color: darkgrey;
+        outline: 0.3px solid slategrey;
+        cursor: pointer !important;
+        
+      }
+}

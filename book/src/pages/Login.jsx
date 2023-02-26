@@ -194,10 +194,7 @@ function Login() {
                           }
                         </small>
                       )}
-          <div className="d-flex justify-content-between mt-4">
-            <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-            <a href="!#">Forgot password?</a>
-          </div>
+         
 
           <div className='text-center text-md-start mt-4 pt-2'>
             <MDBBtn className="mb-0 px-5" size='lg'>Login</MDBBtn>

@@ -1,0 +1,50 @@
+.next-read{
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    &-books{
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        margin: auto;
+        overflow: hidden;
+        padding: 0 20px;
+        @media screen and (max-width:480px) {
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+         }
+    
+        &-right{
+            overflow: scroll;
+            position: relative;
+            flex:1;
+            &-lists{
+                display: grid;
+                gap:1rem;
+             grid-template-columns: repeat(4,1fr);
+            // flex:1;
+            flex-shrink: 0;
+            @media screen and (max-width:990px) {
+
+               width: 550px !important;
+            }
+            @media screen and (max-width:480px) {
+                display: flex;
+                width: 400px!important;
+             }
+            }
+        }
+    }
+}
+.big-2{
+    margin-top: 2em !important;
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    margin: auto;
+    img{
+        width: 100%;
+    }
+}

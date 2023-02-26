@@ -1,0 +1,60 @@
+
+#swiper-cate-comp{
+    padding: 0 40px;
+    overflow: hidden !important;
+}
+#slide-cate-comp {
+    position: relative !important;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap:15px;
+    align-items: center;
+    height:320px ;
+    overflow: hidden;
+    &:hover .btn-slider-add-cart{
+        bottom: 0px !important;
+    }
+    img{
+      height: 100%;
+      object-fit: cover;
+        width: 100%;
+    }
+    .btn-slider-add-cart{
+        outline: 0;
+        transition: all .3s ease;
+        border : 2px solid #355A93;
+        font-size: 0.8em;
+        padding: 8px;
+        font-weight: bold;
+        min-width: 100%;
+        background-color: #fff;
+        color:#355A93;
+        position: absolute;
+        bottom: -100%;
+        font-family: 'Lato', sans-serif !important;
+    }
+  }
+
+  .swiper-button-prev,.swiper-button-next{
+    color:#fff !important;
+    border-radius: 0 !important;
+    // width: 20px !important;
+    font-size: 20px !important;
+  }
+  #swiper-cate-comp .swiper-button-prev{
+    color:#333 !important;
+    background-color: white !important;
+    box-shadow: 3px 0px 21px -2px rgba(0,0,0,0.45);
+  }
+  #swiper-cate-comp .swiper-button-next{
+    color:#333 !important;
+    background-color: white !important;
+    box-shadow: 3px 0px 21px -2px rgba(0,0,0,0.45);
+  }

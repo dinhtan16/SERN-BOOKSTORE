@@ -7,6 +7,9 @@ import { useSelector } from "react-redux";
 const Admin = () => {
   const navigate = useNavigate();
   const userAdmin = useSelector((state) => state.user.currentUser);
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const links = [
     {
       id: 1,
@@ -35,7 +38,7 @@ const Admin = () => {
           </div>
         </div>
         <div className="list-manager">
-          <p>General</p>
+          <p onClick={() => navigate('/admin')} style={{cursor:'pointer'}}>General</p>
           {links.map((item) => {
             return (
               <NavLink

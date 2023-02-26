@@ -1,0 +1,54 @@
+.about-us-home{
+    max-width: 1400px;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    .read-more{
+    
+        height: 0;
+        width: 0;
+        overflow: hidden;
+        transition: all .3s ease-in-out;
+        &.active{
+        height: fit-content;
+        width: 100%;
+        transition: all .3s ease-in-out;
+
+        }
+    }
+    &-item{
+        padding: 0 20px;
+        display: flex;
+        max-width: 900px;
+        margin: auto;
+        flex-direction: column;
+        margin-top: 1.5em;
+        h6{
+            font-weight: bold;
+            margin: 0 !important;
+        }
+        p{
+            text-align: left;
+            font-size: 0.86em;
+        margin-bottom: 10px !important;
+        padding-bottom: 10px !important;
+
+            border-bottom: 1px solid black;
+            
+        }
+    
+        p:nth-last-child(1){
+            border-bottom: none;
+
+        }
+        #see-more{
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1em;
+            text-decoration: underline;
+            cursor: pointer;
+
+        }
+    }
+}

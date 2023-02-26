@@ -58,3 +58,33 @@ export const getOneBookService = (id) => new Promise(async (resolve,reject) => {
         reject(error)
     }
 })
+
+export const updateBookService = (id) => new Promise(async (resolve,reject) => {
+    
+    try{
+        const response = await axiosConfig({
+            method:"put",
+            url:`/api/book/update`,
+            data:id
+        })
+        // console.log(response)
+        resolve(response)
+    }catch(error){
+        reject(error)
+    }
+})
+
+export const deleteBookService = (id) => new Promise(async (resolve,reject) => {
+    
+    try{
+        const response = await axiosConfig({
+            method:"delete",
+            url:`/api/book/delete`,
+            params:id
+        })
+        // console.log(response)
+        resolve(response)
+    }catch(error){
+        reject(error)
+    }
+})

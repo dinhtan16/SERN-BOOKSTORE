@@ -29,7 +29,7 @@ new Promise(async (resolve, reject) => {
 // ["id","title","price","available","imageUrl"]
       const response = await db.Book.findAndCountAll({
         where:query,
-        attributes:["id","title","price","available","imageUrl","priceCode"],
+        attributes:["id","title","price","available","imageUrl","priceCode",'description'],
         include:[
             {model:db.Category,as:"cateCode",attributes:["value"]}
           ],
@@ -52,7 +52,6 @@ new Promise(async (resolve, reject) => {
 export const getOneBook = (body) =>
 new Promise(async (resolve, reject) => {
     try {
-        
       const response = await db.Book.findOne({
         where:{id:body.id},
         attributes:["id","title","price","available","imageUrl","priceCode",'description'],
@@ -122,7 +121,14 @@ new Promise(async (resolve, reject) => {
            if(fileData) body.fileName = fileData?.filename
             //obj1 : cái mình muốn sửa
             //obj2 : condition
-          const response = await db.Book.update(body,{
+            // console.log(body.price)
+         let currentPrice = body.price
+         let categoryBody = body.category
+          const response = await db.Book.update({
+            ...body,
+            priceCode:dataPrice.find(price => price.min <= currentPrice && price.max >= currentPrice)?.code,
+            category_code:generateCode(categoryBody)
+          },{
             where:{id},
           });
           console.log(response[0])
@@ -140,21 +146,21 @@ new Promise(async (resolve, reject) => {
         
       });
   
-      export const deleteBook = (ids,fileName) =>
+      export const deleteBook = ({id}) =>
       new Promise(async (resolve, reject) => {
           try {
             //ids : mảng ids chứa các id cần xóa
+            console.log(id)
             const response = await db.Book.destroy({
-              where:{id:ids},
+              where:{id:id},
             });
             //response destroy trả về số lượng record đã xóa
             resolve({
               err: response > 0 ? 0 : 1,
               msg: response > 0 ? `${response} books deleted` : "xóa thất bại/ ID Sai",
             });
-            if(fileName) cloudinary.api.delete_resources(fileName)
           } catch (error) {
-
+            console.log(error)
             reject(error);
     
           }
