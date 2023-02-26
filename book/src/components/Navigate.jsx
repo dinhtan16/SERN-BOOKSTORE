@@ -142,13 +142,20 @@ export default function Navigate() {
 
   return (
     <div className={`headers ${stickyClass}`}>
-      <div style={{display:'flex',gap:"1em",padding:10,userSelect:'none'}} className='top-header'>
-        <span>Stores & Events</span> <span>|</span>{" "}
-        <span>Blog & Podcast</span> <span>| </span>
+      <div
+        style={{ display: "flex", gap: "1em", padding: 10, userSelect: "none" }}
+        className="top-header"
+      >
+        <span>Stores & Events</span> <span>|</span> <span>Blog & Podcast</span>{" "}
+        <span>| </span>
         <span>Membership</span> <span>| </span>
-        <span>Coupons & Deals</span><span>|</span>
+        <span>Coupons & Deals</span>
+        <span>|</span>
         <span>Bestsellers</span> |<span>Gift Cards</span>
       </div>
+      <span onClick={() => navigate("/")} style={{ cursor: "pointer" }} className='logo-mobile'>
+            <img src={logo} alt="" />
+          </span>
       <div className="headers-navbar">
         <div className="navbar-brand">
           <span
@@ -157,7 +164,7 @@ export default function Navigate() {
           >
             <AiOutlineMenu size={24} />
           </span>
-          <span onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
+          <span onClick={() => navigate("/")} style={{ cursor: "pointer" }} className='logo-pc'>
             <img src={logo} alt="" />
           </span>
         </div>
@@ -245,8 +252,15 @@ export default function Navigate() {
               onClick={() => setIsDropdown((prev) => !prev)}
             >
               <div className="user-welcome-right">
-              {currentUser?.avatar ? <img src={currentUser?.avatar} alt="Your account" /> : <img src='https://bloganchoi.com/wp-content/uploads/2022/02/avatar-trang-y-nghia.jpeg' alt="Your account" />}  
-                <span> {currentUser?.name}</span>
+                {currentUser?.avatar ? (
+                  <img src={currentUser?.avatar} alt="Your account" />
+                ) : (
+                  <img
+                    src="https://bloganchoi.com/wp-content/uploads/2022/02/avatar-trang-y-nghia.jpeg"
+                    alt="Your account"
+                  />
+                )}
+                <span className="name-user"> {currentUser?.name}</span>
               </div>
               <div
                 className={`${cartItems.length > 0 ? "notify" : "none"}`}
@@ -278,22 +292,28 @@ export default function Navigate() {
                   Carts{" "}
                   <span className="order-notify">{cartItems.length || 0}</span>
                 </div>
-              {currentUser?.name &&  <div
-                  className="content-item"
-                  id="order"
-                  onClick={() => navigate("/your-order")}
-                >
-                  <VscPackage />
-                  Your Orders{" "}
-                  <span className="order-notify">{orderInfo?.length || 0}</span>
-                </div>}
-            { currentUser?.name &&   <div
-                  className="content-item"
-                  onClick={() => navigate("/user-info")}
-                >
-                  <BiUser />
-                  <span>User Information</span>
-                </div>}
+                {currentUser?.name && (
+                  <div
+                    className="content-item"
+                    id="order"
+                    onClick={() => navigate("/your-order")}
+                  >
+                    <VscPackage />
+                    Your Orders{" "}
+                    <span className="order-notify">
+                      {orderInfo?.length || 0}
+                    </span>
+                  </div>
+                )}
+                {currentUser?.name && (
+                  <div
+                    className="content-item"
+                    onClick={() => navigate("/user-info")}
+                  >
+                    <BiUser />
+                    <span>User Information</span>
+                  </div>
+                )}
                 <div className="content-auth">
                   <div className={isLogged ? "auth logout" : "auth"}>
                     <div onClick={() => handleLogout()}>

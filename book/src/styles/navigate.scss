@@ -4,6 +4,18 @@
     }
 }
 .headers{
+    .logo-mobile{
+        display: none;
+}
+    @media screen and (max-width:414px) {
+        .logo-mobile{
+                display: block;
+                text-align: center;
+        }
+        .logo-pc{
+            display: none;
+        }
+    }
     padding: 0 10px;
     .top-header{
      font-family: 'Source Serif Pro', serif !important; 
@@ -121,10 +133,9 @@
 .user-welcome{
     min-width: 170px;
    max-width: 500px;
-   @media screen and (max-width:490px) {
+   @media screen and (max-width:520px) {
        min-width: 0 !important;
-    span{
-    }
+   
 }
     padding: 5px;
     position: relative;
@@ -137,11 +148,20 @@
     cursor: pointer;
     &-right{
         // display: none;
-        @media screen and (max-width:490px) {
+        @media screen and (max-width:520px) {
             span{
                 display: none;
             }
         }
+        // .name-user{
+        //     width:70px !important;
+        //     vertical-align: middle;
+        //     display: inline-block;
+        //     /**Major Properties**/
+        //     white-space:nowrap;
+        //     overflow:hidden;
+        //     text-overflow:ellipsis;
+        // }
     }
     img{
         width: 35px;

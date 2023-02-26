@@ -6,7 +6,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            z-index: 1;
+            z-index: 8;
             background-color: rgba($color: #000000, $alpha: 0.2) !important;
         
     }
@@ -45,10 +45,16 @@
                 cursor: pointer;
                 position: absolute;
                 top: 0px;
-                @media screen and (max-width:400px) {
+                @media screen and (max-width:420px) {
                 right: 0px;
                     
                 }
+                @media screen and (max-width:350px) {
+                    right: 40px;
+
+                //    left: 20px;
+                        
+                    }
                 right: -48px;
                 padding: 11px;   
                 background-color: #fff;
