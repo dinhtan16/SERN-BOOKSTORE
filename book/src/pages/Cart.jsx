@@ -13,9 +13,6 @@ import {  Modal } from 'antd';
 const Cart = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  React.useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   const handleOk = () => {
     handleSubmitCart()
     setIsModalOpen(false);

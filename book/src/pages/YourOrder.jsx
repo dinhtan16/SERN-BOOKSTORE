@@ -84,7 +84,7 @@ const YourOrder = () => {
             <Input />
           </div>
           <div className='table' style={{overflow:'auto'}}>
-          <Table dataSource={orderInfo} columns={columns} pagination={false}/>
+          <Table dataSource={orderInfo && orderInfo} columns={columns} pagination={false}/>
           </div>
         </div>
         </section> : <div style={{marginTop:20,fontWeight:'bold'}}>

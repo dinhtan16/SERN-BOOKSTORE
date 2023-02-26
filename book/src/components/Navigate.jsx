@@ -136,7 +136,7 @@ export default function Navigate() {
   const stickNavbar = () => {
     if (window !== undefined) {
       let windowHeight = window.scrollY;
-      windowHeight > 80 ? setStickyClass('sticky-nav') : setStickyClass('relative');
+      windowHeight > 60 ? setStickyClass('sticky-nav') : setStickyClass('relative');
     }
   };
   return (
@@ -244,7 +244,7 @@ export default function Navigate() {
               onClick={() => setIsDropdown((prev) => !prev)}
             >
               <div className="user-welcome-right">
-                <img src={currentUser?.avatar} alt="Your account" />
+              {currentUser?.avatar ? <img src={currentUser?.avatar} alt="Your account" /> : <img src='https://bloganchoi.com/wp-content/uploads/2022/02/avatar-trang-y-nghia.jpeg' alt="Your account" />}  
                 <span> {currentUser?.name}</span>
               </div>
               <div
@@ -284,7 +284,7 @@ export default function Navigate() {
                 >
                   <VscPackage />
                   Your Orders{" "}
-                  <span className="order-notify">{orderInfo.length || 0}</span>
+                  <span className="order-notify">{orderInfo?.length || 0}</span>
                 </div>
                 <div
                   className="content-item"
