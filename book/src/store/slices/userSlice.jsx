@@ -30,7 +30,7 @@ const userSlice = createSlice({
   reducers: {
 
     setLogOutCurrentUser:(state,action) => {
-        state.currentUser = {}
+        state.currentUser = null
     }
   },
   extraReducers: (builder) => {

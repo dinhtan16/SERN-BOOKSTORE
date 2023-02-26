@@ -33,3 +33,47 @@ p{
   margin: 0 !important;
   padding: 0 !important;
 }
+.float-button{
+  position: fixed; 
+   /* left: 50%; */
+   right: 20px;
+   bottom: 20px;
+   font-size: 2rem;
+   z-index: 1;
+   cursor: pointer;
+   height: auto;
+   flex-direction: column;
+  gap: 0.2em;
+  align-items: center;
+  justify-content: center;
+}
+.to-cart{
+  position: relative;
+}
+.cart-length{
+  position: absolute;
+  top: 0;
+  right: 0px;
+  background-color: red;
+  font-size: 14px;
+  border-radius: 999px;
+  color: white;
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  width: 20px;height: 20px;
+}
+.float-button button {
+  background-color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 999px;
+  width: 50px;height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: -3px 0px 31px 0px rgba(0,0,0,0.14);
+-webkit-box-shadow: -3px 0px 31px 0px rgba(0,0,0,0.14);
+-moz-box-shadow: -3px 0px 31px 0px rgba(0,0,0,0.14);
+}

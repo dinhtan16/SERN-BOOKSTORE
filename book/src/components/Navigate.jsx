@@ -134,11 +134,12 @@ export default function Navigate() {
   }, []);
 
   const stickNavbar = () => {
-    if (window !== undefined) {
-      let windowHeight = window.scrollY;
-      windowHeight > 60 ? setStickyClass('sticky-nav') : setStickyClass('relative');
-    }
+    // if (window !== undefined) {
+    //   let windowHeight = window.scrollY;
+    //   windowHeight > 60 ? setStickyClass('sticky-nav') : setStickyClass('relative');
+    // }
   };
+
   return (
     <div className={`headers ${stickyClass}`}>
       <div style={{display:'flex',gap:"1em",padding:10,userSelect:'none'}} className='top-header'>
@@ -277,7 +278,7 @@ export default function Navigate() {
                   Carts{" "}
                   <span className="order-notify">{cartItems.length || 0}</span>
                 </div>
-                <div
+              {currentUser?.name &&  <div
                   className="content-item"
                   id="order"
                   onClick={() => navigate("/your-order")}
@@ -285,14 +286,14 @@ export default function Navigate() {
                   <VscPackage />
                   Your Orders{" "}
                   <span className="order-notify">{orderInfo?.length || 0}</span>
-                </div>
-                <div
+                </div>}
+            { currentUser?.name &&   <div
                   className="content-item"
                   onClick={() => navigate("/user-info")}
                 >
                   <BiUser />
                   <span>User Information</span>
-                </div>
+                </div>}
                 <div className="content-auth">
                   <div className={isLogged ? "auth logout" : "auth"}>
                     <div onClick={() => handleLogout()}>
