@@ -47,6 +47,10 @@
                 display: flex;
                 width: 400px!important;
              }
+             @media screen and (max-width:400px) {
+                display: flex;
+                width: 250px!important;
+             }
             }
         }
     }
