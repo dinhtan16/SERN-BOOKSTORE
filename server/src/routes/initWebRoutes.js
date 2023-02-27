@@ -43,8 +43,8 @@ const router = express.Router()
     router.get('/my-cart',[verifyToken],getCartUserController)
 
     
-    router.get('/api/insert',insertController)
-    router.get('/api/price',insertPriceController)
+    // router.get('/api/insert',insertController)
+    // router.get('/api/price',insertPriceController)
 
 
     //PRIVATE ROUTES // những route nằm dưới verify đều private
@@ -66,7 +66,7 @@ const router = express.Router()
 
 
 
-    router.post('/api/book/create',[verifyToken,verifyAdmin],insertBookController)
+    router.post('/api/create-book',[verifyToken,verifyAdmin],insertBookController)
     router.put('/api/book/update',[verifyToken,verifyAdmin],updateBookController)
     router.delete('/api/book/delete',[verifyToken,verifyAdmin],deleteBookController)
 

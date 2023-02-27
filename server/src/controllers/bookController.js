@@ -51,21 +51,19 @@ export const insertBookController = async (req, res) => {
   try {
     const fileData = req.file; //single file
     // console.log(fileData)
-    const { error } = Joi.object({
-      title,
-      price,
-      available,
-      category_code,
-      image_sId,
-      description,
-      imageUrl,
-    }).validate({ ...req.body, imageUrl: fileData?.path });
+    // const { error } = Joi.object({
+    //   title,
+    //   price,
+    //   available,
+    //   category_code,
+    //   description,
+    // }).validate({ ...req.body, imageUrl: fileData?.path });
 
-    if (error) {
-      //nếu data lỗi thì ảnh vẫn dc upload nên handle nếu data lỗi thì xóa ảnh đã upload
-      if (fileData) cloudinary.uploader.destroy(fileData.filename);
-      return BadRequest(error.details[0].message, res);
-    }
+    // if (error) {
+    //   //nếu data lỗi thì ảnh vẫn dc upload nên handle nếu data lỗi thì xóa ảnh đã upload
+    //   if (fileData) cloudinary.uploader.destroy(fileData.filename);
+    //   return BadRequest(error.details[0].message, res);
+    // }
 
     const response = await createBook(req.body, fileData);
     return res.status(200).json(response);

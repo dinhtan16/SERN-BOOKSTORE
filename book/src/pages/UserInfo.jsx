@@ -7,8 +7,7 @@ import { updateUserService } from "../services/user";
 import { uploadImage } from "../services/uploadImage";
 import {ScaleLoader
 } from 'react-spinners'
-import {toast} from 'react-toastify'
-
+import Swal from 'sweetalert2'
 import { fetchCurrentUser } from "../store/slices/userSlice";
 import { validate } from "../components/Validate";
 
@@ -45,16 +44,11 @@ const UserInfo = () => {
        if(invalids === 0) {
         await updateUserService({...payload,id:currentUser?.id})
         dispatch(fetchCurrentUser(dispatch))
-        toast.success('Update successfully!', {
-          position: "bottom-center",
-          autoClose: 200,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          });
+        Swal.fire({
+          icon: 'success',
+          title: 'Update Successfully',
+          text: 'Your info is changed',
+        })
        }
     }
     const handleUploadFile =async (e) => {

@@ -86,15 +86,17 @@ new Promise(async (resolve, reject) => {
       try {
          
         let currentPrice = getNumberFromString(body.price)
+        let categoryBody = body.category
+
         const response = await db.Book.findOrCreate({
           where:{title:{[Op.substring]:body?.title}},
           defaults:{
             id:v4(),
             priceCode:dataPrice.find(price => price.min <= currentPrice && price.max >= currentPrice)?.code,
-            imageUrl:fileData?.path,
-            fileName:fileData?.filename,
-            ...body
-
+            // imageUrl:fileData?.path,
+            // fileName:fileData?.filename,
+            ...body,
+            category_code:generateCode(categoryBody)
 
           }
         });

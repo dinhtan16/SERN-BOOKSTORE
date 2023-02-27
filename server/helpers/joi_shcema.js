@@ -10,7 +10,7 @@ export const idUser = joi.required();
 
 
 
-export const title = joi.string().email().required()
+export const title = joi.string().required()
 export const price = joi.number().required()
 export const available = joi.number().required()
 export const category_code = joi.string().uppercase().alphanum().required()
