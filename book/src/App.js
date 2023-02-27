@@ -13,6 +13,7 @@ import { BsArrowBarUp, BsMinecartLoaded } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { Button, Modal } from 'antd';
 function App() {
+  document.title='BookStore'
   const [visible, setVisible] = useState(false)
   const cartItems = useSelector((state) => state.cart.cartItems);
   const navigate= useNavigate()
