@@ -18,11 +18,11 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 app.use(cors({
-    origin:process.env.CLIENT_URL,
+    origin:'https://bookstoredt.netlify.app',
     methods:['GET','POST','DELETE','PUT']
 }))
 app.use(cors({
-  origin:process.env.ADMIN_URL,
+  origin:'https://bookstoredt.netlify.app',
   methods:['GET','PUT','DELETE','POST']
 }))
 // app.use(express.bodyParser());
