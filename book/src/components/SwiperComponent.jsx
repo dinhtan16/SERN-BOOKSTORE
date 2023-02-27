@@ -13,7 +13,7 @@ import { Skeleton } from '@mui/material';
 
 import { addCart } from '../store/slices/cartSlice';
 import {toast} from 'react-toastify'
-const SwiperComponent = ({data}) => {
+const SwiperComponent = ({data,isLoading}) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -64,7 +64,7 @@ const SwiperComponent = ({data}) => {
             id="swiper-cate-comp"
           >
             { 
-            !data ?  
+            isLoading ?  
             <div  id='slide-cate-comp' style={{display:'flex'}}>
               {
                 <div style={{display:'flex',gap:'1em'}}>

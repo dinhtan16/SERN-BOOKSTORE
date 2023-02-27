@@ -26,10 +26,10 @@ const NextRead = () => {
         <section className="next-read">
           <div className="next-read-books">
             <div className="next-read-books-left">
-             { nextReadData.slice(0,1).map(item => <BookItem data={item}/>) }  
+             { nextReadData.slice(0,1).map(item => <BookItem data={item} isLoading={isLoading}/>) }  
             </div>
             <div className="next-read-books-right">
-            <div className="next-read-books-right-lists">{nextReadData.slice(1,9).map(item => <BookItem data={item} right/>)}</div>
+            <div className="next-read-books-right-lists">{nextReadData.slice(1,9).map(item => <BookItem data={item} right isLoading={isLoading}/>)}</div>
             </div>
           </div>
         </section>
