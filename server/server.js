@@ -4,11 +4,11 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import initWebRoutes from './src/routes/initWebRoutes.js'
 import bodyParser from 'body-parser'
-import {testConnect} from '../server/connectionDb.js'
+// import {testConnect} from '../server/connectionDb.js'
 import { v4 } from 'uuid';
 
 
-testConnect()
+// testConnect()
 
 dotenv.config()
 const app = express()
