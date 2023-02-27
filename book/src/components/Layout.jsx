@@ -1,11 +1,9 @@
-import React, { useEffect, useLayoutEffect } from 'react'
+import React, { useEffect } from 'react'
 import Footer from '../pages/Footer'
 import Navigate from './Navigate'
-import RouterLayout from '../routes/Routes'
 // import AdminPage from '../pages/AdminPage'
 import { Outlet } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
 import { fetchCurrentUser } from '../store/slices/userSlice'
 import Banner from './Header/Banner'
 const Layout = () => {

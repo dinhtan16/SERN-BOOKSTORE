@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
 import SwiperComponent from '../SwiperComponent';
-import {getAllBooksDefault} from '../../store/slices/bookSlice'
 import { getAllBooks } from '../../services/books';
 const MiniSlider = ({page}) => {
   const [nextReadData, setNextReadData] = useState([]);

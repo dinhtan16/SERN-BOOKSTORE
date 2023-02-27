@@ -1,7 +1,6 @@
 import React from "react";
 import "../../styles/listNavbar.scss";
 import { IoMdClose } from "react-icons/io";
-import { useDispatch } from "react-redux";
 import { createSearchParams, useNavigate } from "react-router-dom";
 const list = [
   {
