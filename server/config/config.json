@@ -6,8 +6,8 @@
     "database": "bgefcwrddmotj0xdseoy",
     "host": "bgefcwrddmotj0xdseoy-mysql.services.clever-cloud.com",
     "port": "3306",
-    "dialect": "mysql2",
-    "dialectModule": "mysql2"
+    "dialect": "mysql",
+    "dialectModule": "mysql"
   },
   "test": {
     "username": "uvbthzpdjkgj5fcq",
@@ -15,8 +15,8 @@
     "database": "bgefcwrddmotj0xdseoy",
     "host": "bgefcwrddmotj0xdseoy-mysql.services.clever-cloud.com",
     "port": "3306",
-    "dialect": "mysql2",
-    "dialectModule": "mysql2"
+    "dialect": "mysql",
+    "dialectModule": "mysql"
   },
   "production": {
     "username": "uvbthzpdjkgj5fcq",
@@ -24,7 +24,7 @@
     "database": "bgefcwrddmotj0xdseoy",
     "host": "bgefcwrddmotj0xdseoy-mysql.services.clever-cloud.com",
     "port": "3306",
-    "dialect": "mysql2",
-    "dialectModule": "mysql2"
+    "dialect": "mysql",
+    "dialectModule": "mysql"
   }
 }
