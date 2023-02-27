@@ -9,6 +9,7 @@ import '../styles/swiper_comp.scss'
 import {  Navigation, Autoplay } from "swiper";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Skeleton } from '@mui/material';
 
 import { addCart } from '../store/slices/cartSlice';
 import {toast} from 'react-toastify'
@@ -62,7 +63,22 @@ const SwiperComponent = ({data}) => {
             className="mySwiper"
             id="swiper-cate-comp"
           >
-            {data?.map((item,i) => {
+            { 
+            !data ?  
+            <div  id='slide-cate-comp' style={{display:'flex'}}>
+              {
+                <div style={{display:'flex',gap:'1em'}}>
+                {  [1,2,3,4,5].map(item =>
+                <div style={{display:'flex',flexDirection:'column',gap:'1em'}}>
+                      <Skeleton variant="rounded" width={210} height={200}/>
+                    <Skeleton variant="rounded" width={210} height={20}/>
+                </div>
+                    )}
+                </div>
+              }
+          </div>
+           :
+            data?.map((item,i) => {
               return (
                 <SwiperSlide key={item.id} id='slide-cate-comp'>
                   <img src={item.imageUrl} alt="hero" className="img-slide" onClick={() => navigate(`/detail/${item.id}`)}/>

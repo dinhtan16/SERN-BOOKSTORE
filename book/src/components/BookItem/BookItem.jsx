@@ -3,24 +3,17 @@ import { useDispatch } from "react-redux";
 import { addCart } from "../../store/slices/cartSlice";
 import "../../styles/bookItem.scss";
 import { toast } from "react-toastify";
+import { Skeleton } from '@mui/material';
+
 import { useNavigate } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 import { useState } from "react";
 const BookItem = ({ data, right }) => {
   // console.log(data)
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  useEffect(() => {
-    setIsLoading(true);
-    const t = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-    // return () => {
-    //   cleanup;
-    // };
-  }, []);
+
+
   const handleCart = () => {
     dispatch(addCart(data));
     toast.success("Added to Cart", {
@@ -34,11 +27,11 @@ const BookItem = ({ data, right }) => {
       theme: "light",
     });
   };
-  return isLoading ? (
+  return !data ? (
     <div className="item-book">
       {" "}
       <div className={`${right ? "item-top right" : "item-top"}`}>
-        <Skeleton height={300}/>
+        <Skeleton variant="rounded" width={210} height={60} />
       </div>
       <div className={`${right ? "item-bottom right" : "item-bottom"}`}>
         <div
@@ -47,11 +40,11 @@ const BookItem = ({ data, right }) => {
           
           style={{ cursor: "pointer" }}
         >
-          <div className="title">    <Skeleton /></div>
+          <div className="title">    <Skeleton variant="rounded" width={210} height={60}/></div>
         </div>
         <div>
        
-          <span >     <Skeleton /></span>
+          <span >     <Skeleton variant="rounded" width={210} height={60} /></span>
         </div>
 
         {/* <button ><Skeleton /></button> */}
