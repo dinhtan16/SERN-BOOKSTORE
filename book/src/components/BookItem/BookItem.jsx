@@ -28,10 +28,10 @@ const BookItem = ({ data, right ,isLoading}) => {
   return isLoading ? (
     <div className="item-book">
       {" "}
-      <div className={`${rightt ? "item-top right" : "item-top"}`}>
+      <div className= "item-top">
         <Skeleton variant="rounded" width={250} height={300} />
       </div>
-      <div className={`${rightt ? "item-bottom right" : "item-bottom"}`}>
+      <div className="item-bottom">
         <div className="item-title" style={{ cursor: "pointer" }}>
           <div className="title">
             {" "}
