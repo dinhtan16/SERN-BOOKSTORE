@@ -93,7 +93,8 @@ function App() {
 
       </div>
       <Modal title="Notify" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        Tài Khoản Admin : <p>admin@gmail.vn</p> <p>Pass: 123456</p> <p>Do host Free nên có thể load API hơi chậm (3-5p), mong anh/chị thông cảm ạ!</p>
+        Tài Khoản Admin : <p>admin@gmail.vn</p> <p>Pass: 123456</p> <p>Do host Free nên có thể load API hơi chậm (4-7p), mong anh/chị thông cảm ạ!</p>
+      <p>I use free Host so API will be slow, it will take 4-7 minutes to load API , sorry for this inconvenient </p>
       </Modal>
     </div>
   );
